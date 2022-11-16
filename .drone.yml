@@ -19,3 +19,4 @@ steps:
       from_secret: secret-registry-username
     password:
       from_secret: secret-registry-password
+      
