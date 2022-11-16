@@ -20,3 +20,10 @@ steps:
     password:
       from_secret: secret-registry-password
       
+- name: deploy-web-container
+  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+  environment:
+    IMAGENAME: hub.codefirst.iut.uca.fr/vincent.astolfi/todo-chill:latest
+    CONTAINERNAME: todo-chill
+    COMMAND: create
+    OVERWRITE: true
