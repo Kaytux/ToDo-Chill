@@ -1,0 +1,21 @@
+kind: pipeline
+type: docker
+name: todoPipeline
+
+trigger:
+  event:
+    - push
+
+steps:
+
+- name: web-todo
+  image: plugins/docker
+  settings:
+    dockerfile: ./Dockerfile
+    context: ./
+    registry: hub.codefirst.iut.uca.fr
+    repo: hub.codefirst.iut.uca.fr/axel.de_la_fuente/todo_list
+    username:
+      from_secret: secret-registry-username
+    password:
+      from_secret: secret-registry-password
