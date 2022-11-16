@@ -1,0 +1,6 @@
+.btn-left-corner{
+    position: absolute;
+    right: 1rem;
+    display: flex;
+    flex-direction: row;
+}

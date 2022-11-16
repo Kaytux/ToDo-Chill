@@ -1,0 +1,41 @@
+/* declaration des variables */
+:root{
+  --color-primary : #EBC7E8;
+  --color-background-primary: #645CAA;
+  --transparent-color: transparent;
+}
+
+html,
+body{
+  background-color: #ffffff;
+  background-image: url("../ressources/images/bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0; 
+  height: 100%; 
+  overflow: hidden
+}
+
+.btn{
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  padding: 1rem 4.5rem;
+  background: var(--color-background-primary);
+  border-radius: 100px;
+  align-content: center;
+  border-color: transparent;
+  transition: 0.5s;
+  margin: 1rem;
+}
+
+.btn:hover{
+  color: var(--color-background-primary);
+  background: var(--color-primary);
+}
+
+.form-entry{
+  height: 1.7rem;
+  border-radius: 100px;
+  border: var(--transparent-color);
+}

@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <?php
-echo 'Hello World';
-require('vues/acceuil.html')
+
+require_once(__DIR__.'/config/config.php');
+
+require_once(__DIR__.'/config/autoload.php');
+Autoload::charger();
+
+// loading a controler
+$cont = new Controler();
 ?>
 </html>
