@@ -14,7 +14,7 @@ steps:
     dockerfile: ./Dockerfile
     context: ./
     registry: hub.codefirst.iut.uca.fr
-    repo: hub.codefirst.iut.uca.fr/axel.de_la_fuente/todo_list
+    repo: hub.codefirst.iut.uca.fr/vincent.astolfi/ToDo-Chill
     username:
       from_secret: secret-registry-username
     password:
