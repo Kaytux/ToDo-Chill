@@ -1,9 +1,9 @@
 <head>
 	<meta charset="utf8"/>
 	<title>Accueil</title>
+	<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/homePage.css">
-	<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">
 </head>
 <body>
 	<div class="btn-left-corner">
