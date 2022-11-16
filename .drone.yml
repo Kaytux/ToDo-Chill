@@ -27,3 +27,5 @@ steps:
     CONTAINERNAME: todo-chill
     COMMAND: create
     OVERWRITE: true
+
+  depends_on: [ web-todo ]
