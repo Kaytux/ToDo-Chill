@@ -1,9 +1,9 @@
 <head>
 	<meta charset="utf8"/>
 	<title>Inscription</title>
+	<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/login.css">
-	  <base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">
 </head>
 <body class="test">
 	<form class="form-login" method="post">
