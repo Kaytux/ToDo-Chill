@@ -8,6 +8,17 @@ trigger:
 
 steps:
 
+- name : deploy-phpmyadmin
+  image: hub.codefirst.iut.uca.fr/thomas.bellembois/codefirst-dockerproxy-clientdrone:latest
+  environment:
+    IMAGENAME: phpmyadmin/phpmyadmin:latest
+    CONTAINERNAME: phpmyadmin
+    COMMAND: create
+    PMA_ARBITRARY: 1
+    PMA_USER: viastolfi
+    PMA_PASSWORD: "MhhLeCaca1!"
+    UPLOAD_LIMIT: 20M
+
 - name: web-todo
   image: plugins/docker
   settings:
