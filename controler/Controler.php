@@ -42,7 +42,7 @@ class Controler{
                     break;
             }
         }catch(PDOException $e){
-            echo "<p>$e</p>";
+            echo "";
         }
         
     } // fin constructeur
