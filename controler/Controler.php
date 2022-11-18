@@ -20,11 +20,16 @@ class Controler{
                     $this->Reinit();
                     break;        
                 case "signIn":
-                case "logIn":
                     require($rep.$vues['signIn']);
+                    break;
+                case "logIn":
+                    require($rep.$vues['logIn']);
                     break;
                 case "createUser":
                     $this->validateRegisterForm();
+                    break;
+                case "accessAccount":
+                    $this->validateLoginForm();
                     break;
             }
         }catch(PDOException $e){
@@ -35,7 +40,7 @@ class Controler{
     
     function Reinit(){
         global $rep, $vues;
-        require($rep.$vues['acceuil']); 
+        require($rep.$vues['homePage']); 
         }
 
     function validateRegisterForm(){
@@ -50,7 +55,20 @@ class Controler{
             require($rep.$vues['signIn']);
         }
         else{
-            require($rep.$vues['acceuil']);
+            require($rep.$vues['homePage']);
+        }
+    }
+
+    function validateLoginForm(){
+        global $rep, $vues;
+
+        $email=$_POST['email'];
+        $password=$_POST['password'];
+
+        if(Validation::valideFormLogin($email, $password, $dVueError)){
+            require($rep.$vues['mainPage']);
+        }else{
+            require($rep.$vues['logIn']);
         }
     }
 

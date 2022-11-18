@@ -7,12 +7,12 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-	<form class="form-login" method="post">
+    <form class="form-login" method="post">
 		<input class="form-entry" type="email" placeholder="Entrer votre email" name="email">
 		<input class="form-entry" type="password" placeholder="Entrer votre mot de passe" name="password">
 		<div>
-			<input class="btn form-validation-btn" type="submit" value="Valider"/>	
-			<input type="hidden" name="action" value="createUser"/>
+			<input class="btn form-validation-btn" type="submit" value="Connexion"/>	
+			<input type="hidden" name="action" value="accessAccount"/>
 		</div>
 	</form>
 

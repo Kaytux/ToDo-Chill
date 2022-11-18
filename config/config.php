@@ -4,10 +4,14 @@ $rep=__DIR__.'/../';
 
 //BD
 $dsn = "mysql:host=localhost; dbname=bdToDoChill";
-$user = "viastolfi";
+$usr = "viastolfi";
 $mdp = "MhhLeCaca1!";
 
 //Vues
-$vues['acceuil']='vues/acceuil.php';
+$vues['homePage']='vues/homePage.php';
 $vues['signIn']='vues/signIn.php';
+$vues['logIn']='vues/logIn.php';
+$vues['mainPage']='vues/mainPage.php';
+
+$connectedUser = array();
 ?>
