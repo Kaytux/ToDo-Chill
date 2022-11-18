@@ -7,6 +7,7 @@ class Controler{
         global $rep,$vues;
         session_start();
         $dVueError = array();
+        $vueSpecificities = array();
 
         try{
             if(isset($_REQUEST['action'])){
@@ -31,9 +32,17 @@ class Controler{
                 case "accessAccount":
                     $this->validateLoginForm();
                     break;
+                case "signOut":
+                    $this->Reinit();
+                    break;
+                case "displayAskingNameDiv":
+                    $this->test();
+                    break;
+                default:
+                    break;
             }
         }catch(PDOException $e){
-            echo 'a faire plus tard';
+            echo "<p>$e</p>";
         }
         
     } // fin constructeur
@@ -70,6 +79,13 @@ class Controler{
         }else{
             require($rep.$vues['logIn']);
         }
+    }
+
+    function test(){
+        global $rep, $vues;
+        $vueSpecificities['visibility'] = "display";
+        require($rep.$vues['homePage']);
+        return;
     }
 
     } // fin classe

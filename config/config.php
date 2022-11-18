@@ -14,4 +14,5 @@ $vues['logIn']='vues/logIn.php';
 $vues['mainPage']='vues/mainPage.php';
 
 $connectedUser = array();
+$connectedUser['email'] = "unknown";
 ?>

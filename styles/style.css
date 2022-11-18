@@ -39,3 +39,8 @@ body{
   border-radius: 100px;
   border: var(--transparent-color);
 }
+
+.test{
+  display: flex;
+  flex-direction: column;
+}
