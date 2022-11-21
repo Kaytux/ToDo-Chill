@@ -50,7 +50,7 @@ class Controler{
                     break;
             }
         }catch(PDOException $e){
-            echo "";
+            echo "$e";
         }
         
     } // fin constructeur

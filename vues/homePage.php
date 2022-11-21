@@ -31,6 +31,18 @@
 				<input type="hidden" name="action" value="displayAskingNameDiv"/>
 			</form>
 			<?php
+				if(isset($vueSpecificities) && count($vueSpecificities)>0){
+					echo'
+					<div class="list">
+					<form method="post">
+						<input type="text" placeholder="Nom de la liste" name="listName">
+						<input type="submit" value="Valider"/>	
+						<input type="hidden" name="action" value="createNewList"/>
+					</form>
+					</div>';
+				}
+			?>
+			<?php
 				global $dsn,$usr,$mdp;
 
 				$con = new Connection($dsn, $usr, $mdp);
@@ -51,18 +63,6 @@
 							echo "<strike>&emsp;$string</strike>";
 						}
 					}
-				}
-			?>
-			<?php
-				if(isset($vueSpecificities) && count($vueSpecificities)>0){
-					echo'
-					<div class="list">
-					<form method="post">
-						<input type="text" placeholder="Nom de la liste" name="listName">
-						<input type="submit" value="Valider"/>	
-						<input type="hidden" name="action" value="createNewList"/>
-					</form>
-					</div>';
 				}
 			?>
 		</div>
