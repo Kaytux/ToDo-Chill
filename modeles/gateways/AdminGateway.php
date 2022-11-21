@@ -8,7 +8,7 @@ class AdminGateway{
     }
 
     public function createTable(){
-        $query='CREATE TABLE Inscrit(
+        $query='CREATE TABLE IF NOT EXISTS Inscrit(
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
             mail varchar(40),
             mdp varchar(40)
@@ -16,7 +16,7 @@ class AdminGateway{
 
         $this->con->executeQueryWithoutParameters($query);
 
-        $query='CREATE TABLE TasksList(
+        $query='CREATE TABLE IF NOT EXISTS TasksList(
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
             idUser INT,
             name varchar(40),
@@ -25,7 +25,7 @@ class AdminGateway{
 
         $this->con->executeQueryWithoutParameters($query);
 
-        $query='CREATE TABLE Task(
+        $query='CREATE TABLE IF NOT EXISTS Task(
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
             name varchar(40),
             status INT NOT NULL,
