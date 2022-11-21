@@ -38,6 +38,9 @@ class Controler{
                 case "displayAskingNameDiv":
                     $this->test();
                     break;
+                case "createNewList":
+                    require($rep.$vues['logIn']);
+                    break;
                 default:
                     break;
             }

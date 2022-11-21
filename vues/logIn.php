@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="fr">
+
 <head>
 	<meta charset="utf8"/>
 	<title>Inscription</title>
@@ -24,3 +27,4 @@
 		}
 	?>
 </body>
+</html>

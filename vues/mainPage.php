@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="fr">
+
 <head>
 	<meta charset="utf8"/>
 	<title>MainPage</title>
@@ -45,3 +48,4 @@
 	?>
     </div>
 <body>
+</html>

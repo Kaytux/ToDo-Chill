@@ -1,6 +1,23 @@
 .btn-left-corner{
-    position: absolute;
-    right: 1rem;
+    position: relative;
     display: flex;
     flex-direction: row;
+    left: 1rem;
+}
+
+.list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.displayList{
+    background: var(--color-background-secondary);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.title{
+    display: flex;
+    justify-content: center;
 }
