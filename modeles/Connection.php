@@ -26,6 +26,11 @@ public function executeQuery(string $query, array $parameters = []) : bool{
 public function getResults() : array {
     return $this->stmt->fetchall();
 }
+
+public function executeQueryWithoutParameters($query) : bool{
+	$this->stmt = parent::prepare($query);
+	return $this->stmt->execute();
+}
 }
 
 ?>

@@ -14,7 +14,7 @@ class AdminGateway{
             mdp varchar(40)
         );';
 
-        $this->con->executeQuery($query, null);
+        $this->con->executeQueryWhitoutParameters($query);
 
         $query='CREATE TABLE TasksList(
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -24,7 +24,7 @@ class AdminGateway{
                 REFERENCES Isncrit(id)
         );';
 
-        $this->con->executeQuery($query, null);
+        $this->con->executeQueryWhitoutParameters($query);
 
         $query='CREATE TABLE Task(
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -35,7 +35,7 @@ class AdminGateway{
                 REFERENCES TasksList(id)
         );';
 
-        $this->con->executeQuery($query, null);
+        $this->con->executeQueryWhitoutParameters($query);
     }
 }
 
