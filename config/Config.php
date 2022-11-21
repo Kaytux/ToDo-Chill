@@ -9,8 +9,8 @@ $rep=__DIR__.'/../';
 
 $dsn='mysql:host=10.9.0.67;dbname='.getenv("MARIADB_DATABASE");
 $dbname=getenv("MARIADB_DATABASE");
-$username=getenv("MARIADB_USER");
-$passwordBD=getenv("MARIADB_PASSWORD");
+$usr=getenv("MARIADB_USER");
+$mdp=getenv("MARIADB_PASSWORD");
 
 
 //Vues
