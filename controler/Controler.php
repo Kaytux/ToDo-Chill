@@ -43,6 +43,9 @@ class Controler{
                     $this->createNewList();
                     require($rep.$vues['homePage']);
                     break;
+                case "test":
+                    $this->test();
+                    break;
                 default:
                     break;
             }
@@ -93,6 +96,15 @@ class Controler{
         $con = new Connection($dsn, $usr, $mdp);
         $gateway = new TaskGateway($con);
         $gateway->createNewListBdd($connectedUser['email'], $name);
+        return;
+    }
+
+    function test(){
+        global $dsn, $usr, $connectedUser;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new AdminGateway($con);
+        $gateway->createTable();
         return;
     }
 
