@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf8"/>
 	<title>Inscription</title>
-	<!--<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">-->
+	<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/form.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
