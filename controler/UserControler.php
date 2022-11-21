@@ -1,6 +1,6 @@
 <?php
 
-class Controler{
+class UserControler{
     
     function __construct(){
 
@@ -83,7 +83,7 @@ class Controler{
         $password=$_POST['password'];
 
         if(Validation::valideFormLogin($email, $password, $dVueError)){
-            require($rep.$vues['mainPage']);
+                require($rep.$vues['mainPage']);
         }else{
             require($rep.$vues['logIn']);
         }

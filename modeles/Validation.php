@@ -31,6 +31,7 @@ class Validation{
             $dataVueError['password'] = "Veuillez renseigner un mot de passe";
             return false;
         }
+
         $con = new Connection($dsn, $usr, $mdp);
         $gateway = new UserGateway($con);
         $user = new User($email, $password);

@@ -11,11 +11,6 @@
 </head>
 <body>	
 
-	<form method="post">
-		<input class="btn" type="submit" value="Test"/>	
-		<input type="hidden" name="action" value="createAllBddTable"/>
-	</form>
-
 	<div class="btn-left-corner">
 		<form method="post">
 			<input class="btn" type="submit" value="Inscription"/>	
