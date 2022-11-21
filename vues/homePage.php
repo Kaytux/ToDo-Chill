@@ -26,6 +26,10 @@
 		<h1 class="title">To-Do Chill</h1>
 		<div class="displayList">
 			<h2 class="title">Liste de tâche publique</h2>
+			<form method="post">
+				<input class="btn" type="submit" value="Ajouter une liste"/>	
+				<input type="hidden" name="action" value="displayAskingNameDiv"/>
+			</form>
 			<?php
 				global $dsn,$usr,$mdp;
 
@@ -49,10 +53,6 @@
 					}
 				}
 			?>
-			<form method="post">
-				<input class="btn" type="submit" value="Ajouter une liste"/>	
-				<input type="hidden" name="action" value="displayAskingNameDiv"/>
-			</form>
 			<?php
 				if(isset($vueSpecificities) && count($vueSpecificities)>0){
 					echo'
