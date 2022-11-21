@@ -100,7 +100,7 @@ class Controler{
     }
 
     function test(){
-        global $dsn, $usr, $connectedUser;
+        global $dsn, $usr, $mdp;
 
         $con = new Connection($dsn, $usr, $mdp);
         $gateway = new AdminGateway($con);
