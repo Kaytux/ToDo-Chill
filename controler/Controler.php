@@ -36,10 +36,12 @@ class Controler{
                     $this->Reinit();
                     break;
                 case "displayAskingNameDiv":
-                    $this->test();
+                    $vueSpecificities['visibility'] = "display";
+                    require($rep.$vues['homePage']);
                     break;
                 case "createNewList":
-                    require($rep.$vues['logIn']);
+                    $this->createNewList();
+                    require($rep.$vues['homePage']);
                     break;
                 default:
                     break;
@@ -84,12 +86,16 @@ class Controler{
         }
     }
 
-    function test(){
-        global $rep, $vues;
-        $vueSpecificities['visibility'] = "display";
-        require($rep.$vues['homePage']);
+    function createNewList(){
+        global $dsn, $usr, $mdp, $connectedUser;
+
+        $name = $_POST['listName'];
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new TaskGateway($con);
+        $gateway->createNewListBdd($connectedUser['email'], $name);
         return;
     }
 
     } // fin classe
+
 ?>

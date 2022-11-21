@@ -58,7 +58,7 @@
 					echo'
 					<div class="list">
 					<form method="post">
-						<input type="texte" placeholder="Nom de la liste">
+						<input type="text" placeholder="Nom de la liste" name="listName">
 						<input type="submit" value="Valider"/>	
 						<input type="hidden" name="action" value="createNewList"/>
 					</form>

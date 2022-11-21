@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__.'/config/config.php');
+require_once(__DIR__.'/config/Config.php');
 
-require_once(__DIR__.'/config/autoload.php');
+require_once(__DIR__.'/config/Autoload.php');
 Autoload::charger();
 
 // loading a controler
