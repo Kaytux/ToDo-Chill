@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/form.css">
 </head>
-<body>
+<body>	
+
+	<form method="post">
+		<input class="btn" type="submit" value="Test"/>	
+		<input type="hidden" name="action" value="createAllBddTable"/>
+	</form>
+
 	<div class="btn-left-corner">
 		<form method="post">
 			<input class="btn" type="submit" value="Inscription"/>	

@@ -18,10 +18,9 @@ class AdminGateway{
 
         $query='CREATE TABLE TasksList(
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            INDEX idUser (Inscrit_id),
+            idUser INT,
             name varchar(40),
-            FOREIGN KEY (Inscrit_id)
-                REFERENCES Isncrit(id)
+            FOREIGN KEY (idUser) REFERENCES Inscrit(id)
         );';
 
         $this->con->executeQueryWithoutParameters($query);
@@ -30,9 +29,8 @@ class AdminGateway{
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
             name varchar(40),
             status INT NOT NULL,
-            INDEX idTasksList (TasksList_id),
-            FOREIGN KEY (TasksList_id)
-                REFERENCES TasksList(id)
+            idTasksList INT,
+            FOREIGN KEY (idTasksList) REFERENCES TasksList(id)
         );';
 
         $this->con->executeQueryWithoutParameters($query);
