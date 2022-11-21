@@ -43,8 +43,8 @@ class Controler{
                     $this->createNewList();
                     require($rep.$vues['homePage']);
                     break;
-                case "test":
-                    $this->test();
+                case "createAllBddTable":
+                    $this->createAllBddTable();
                     break;
                 default:
                     break;
@@ -99,7 +99,7 @@ class Controler{
         return;
     }
 
-    function test(){
+    function createAllBddTable(){
         global $dsn, $usr, $mdp;
 
         $con = new Connection($dsn, $usr, $mdp);
