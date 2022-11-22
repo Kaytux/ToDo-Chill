@@ -18,19 +18,18 @@ class UserGateway{
     public function searchUserIdentidiant(User $user){
         global $connectedUser;
         $query='SELECT * FROM Inscrit where mail=:mail';
-        if(!$this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR)))){
-            return false;
-        }
+
+        $this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR)));
         $results=$this->con->getResults();
 
         foreach($results as $row){
             $connectedUser['email']=$row['mail'];
-            if($row['isAdmin']===true){
-                MdlAdmin::connection('admin','admin');
-                return true;
+            if($row['isAdmin']===1){
+                return "test";
             }
+            return "true";
         }
-        return true;
+        return "false";
     }
 }
 ?>

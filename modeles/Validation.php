@@ -35,12 +35,17 @@ class Validation{
         $con = new Connection($dsn, $usr, $mdp);
         $gateway = new UserGateway($con);
         $user = new User($email, $password);
-        if($gateway->searchUserIdentidiant($user)){
+        $test=$gateway->searchUserIdentidiant($user);
+
+        if($test==="test"){
+            $dataVueError['spec']="admin";
             return true;
-        }else{
+        }
+        if($test==="false"){
             $dataVueError['unknonw'] = "identifiant inconnue";
             return false;
         }
+        return $test;
     }
 }
 ?>

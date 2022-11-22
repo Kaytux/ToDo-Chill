@@ -6,8 +6,6 @@ class UserControler{
 
         global $rep,$vues;
         session_start();
-        $dVueError = array();
-        $vueSpecificities = array();
 
         try{
             if(isset($_REQUEST['action'])){
@@ -18,7 +16,6 @@ class UserControler{
             }        
             switch($action){
                 case NULL:
-                    $this->Reinit();
                     break;        
                 case "signIn":
                     require($rep.$vues['signIn']);
@@ -46,6 +43,9 @@ class UserControler{
                 case "createAllBddTable":
                     $this->createAllBddTable();
                     break;
+                case "connect":
+                    echo "vous êtes connecté";
+                    break;
                 default:
                     break;
             }
@@ -57,8 +57,8 @@ class UserControler{
     
     function Reinit(){
         global $rep, $vues;
-        require($rep.$vues['homePage']); 
-        }
+        require($rep.$vues['logIn']); 
+    }
 
     function validateRegisterForm(){
         global $rep, $vues;
