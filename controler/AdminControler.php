@@ -18,6 +18,21 @@ class AdminControler{
                 case NULL:
                     $this->Reinit();
                     break;
+                case "createTableBdd":
+                    $this->createTableBdd();
+                    $this->Reinit();
+                    break;
+                case "createUser":
+                    $this->createUser();
+                    $this->Reinit();
+                    break;
+                case "deleteAllBdd":
+                    $this->deleteAllBdd();
+                    $this->Reinit();
+                    break;
+                case "disconnectFromAdmin":
+                    MdlAdmin::deconnection();
+                    break;
                 default:
                     $this->Reinit();
                     break;
@@ -30,6 +45,34 @@ class AdminControler{
     function Reinit(){
         global $rep, $vues;
         require($rep.$vues['adminPage']);
+    }
+
+    function createTableBdd(){
+        global $dsn, $usr, $mdp;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new AdminGateway($con);
+        $gateway->createTable();
+        return;
+    }
+
+    function createUser(){
+        global $dsn, $usr, $mdp;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new UserGateway($con);
+        $user = new User($_POST['email'], $_POST['password']);
+        $gateway->addUserBdd($user);
+        return;
+    }
+
+    function deleteAllBdd(){
+        global $dsn, $usr, $mdp;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new AdminGateway($con);
+        $gateway->deleteAllBdd();
+        return;
     }
 }
 

@@ -7,7 +7,7 @@ class FrontControler{
 
         $listeAction_Admin = array('deconnecter', 'supprimer', 'ajouter');
         // MdlAdmin::connection('admin', 'admin');
-        
+
         try{
             $admin = MdlAdmin::isAdmin();
 

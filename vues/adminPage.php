@@ -10,5 +10,29 @@
 </head>
 <body>
     <h1>Bienvenue Mr. l'Admin</h1>
+    <form method="post">
+		<input class="btn" type="submit" value="Recréer les tables"/>	
+		<input type="hidden" name="action" value="createTableBdd"/>
+	</form>
+
+	<form class="form-login" method="post">
+		<input class="form-entry" type="text" placeholder="Entrer votre email" name="email">
+		<input class="form-entry" type="password" placeholder="Entrer votre mot de passe" name="password">
+		<div>
+			<input class="btn form-validation-btn" type="submit" value="Créer un nouveau user"/>	
+			<input type="hidden" name="action" value="createUser"/>
+		</div>
+	</form>
+    
+    <form method="post">
+		<input class="btn" type="submit" value="Quitter le mode admin"/>	
+		<input type="hidden" name="action" value="disconnectFromAdmin"/>
+	</form>
+    
+
+    <form method="post">
+		<input class="btn" type="submit" value="VIDER LA BDD"/>	
+		<input type="hidden" name="action" value="deleteAllBdd"/>
+	</form>
 </body>
 </html>
