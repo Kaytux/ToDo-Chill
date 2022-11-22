@@ -33,7 +33,12 @@
 
     <form method="post">
 		<input class="btn" type="submit" value="VIDER LA BDD"/>	
-		<input type="hidden" name="action" value="deleteAllBdd"/>
+		<input type="hidden" name="action" value="deleteAllDataBdd"/>
+	</form>
+
+    <form method="post">
+		<input class="btn" type="submit" value="DETRUIRE TOUTE LES TABLES"/>	
+		<input type="hidden" name="action" value="deleteAllTableBdd"/>
 	</form>
 </body>
 </html>

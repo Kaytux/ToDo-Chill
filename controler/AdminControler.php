@@ -26,8 +26,12 @@ class AdminControler{
                     $this->createUser();
                     $this->Reinit();
                     break;
-                case "deleteAllBdd":
-                    $this->deleteAllBdd();
+                case "deleteAllDataBdd":
+                    $this->deleteAllDataBdd();
+                    $this->Reinit();
+                    break;
+                case "deleteAllTableBdd":
+                    $this->deleteAllTableBdd();
                     $this->Reinit();
                     break;
                 case "disconnectFromAdmin":
@@ -72,12 +76,21 @@ class AdminControler{
         return;
     }
 
-    function deleteAllBdd(){
+    function deleteAllDataBdd(){
         global $dsn, $usr, $mdp;
 
         $con = new Connection($dsn, $usr, $mdp);
         $gateway = new AdminGateway($con);
-        $gateway->deleteAllBdd();
+        $gateway->deleteAllDataBdd();
+        return;
+    }
+
+    function deleteAllTableBdd(){
+        global $dsn, $usr, $mdp;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new AdminGateway($con);
+        $gateway->deleteAllTableBdd();
         return;
     }
 }

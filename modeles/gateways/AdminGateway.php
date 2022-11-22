@@ -37,7 +37,7 @@ class AdminGateway{
         $this->con->executeQueryWithoutParameters($query);
     }
 
-    function deleteAllBdd(){
+    function deleteAllDataBdd(){
         $query='DELETE FROM Task';
         $this->con->executeQueryWithoutParameters($query);
 
@@ -54,6 +54,11 @@ class AdminGateway{
             ':mail'=>array($user->getEmail(), PDO::PARAM_STR),
             ':password'=>array($user->getPassword(), PDO::PARAM_STR)
         ));
+    }
+
+    function deleteAllTableBdd(){
+        $query='DROP TABLE Task; DROP TABLE TasksList; DROP TABLE Inscrit';
+        $this->con->executeQueryWithoutParameters($query);
     }
 }
 

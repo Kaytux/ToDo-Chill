@@ -6,15 +6,15 @@ class FrontControler{
         global $rep, $vues;
 
         $listeAction_Admin = array('deconnecter', 'supprimer', 'ajouter');
-        MdlAdmin::connection('admin', 'admin');
+        // MdlAdmin::connection('admin', 'admin');
 
         try{
             $admin = MdlAdmin::isAdmin();
 
             if($admin === null){
-                $cont = new UserControler();
+                new UserControler();
             }else{
-                $cont = new AdminControler();
+                new AdminControler();
             }
         }catch(Exception $e){
             echo "<p>A faire $e</p>";
