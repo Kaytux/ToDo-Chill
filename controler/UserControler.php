@@ -34,7 +34,7 @@ class UserControler{
                     break;
                 case "displayAskingNameDiv":
                     $vueSpecificities['visibility'] = "display";
-                    require($rep.$vues['homePage']);
+                    require($rep.$vues['logIn']);
                     break;
                 case "createNewList":
                     $this->createNewList();
@@ -44,7 +44,7 @@ class UserControler{
                     $this->createAllBddTable();
                     break;
                 case "connect":
-                    echo "vous êtes connecté";
+                    require($rep.$vues['connectedPage']);
                     break;
                 default:
                     break;

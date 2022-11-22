@@ -17,13 +17,12 @@ class UserGateway{
 
     public function searchUserIdentidiant(User $user){
         global $connectedUser;
-        $query='SELECT * FROM Inscrit where mail=:mail';
+        $query='SELECT * FROM Inscrit where mail=:mail AND mdp=:mdp';
 
-        $this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR)));
+        $this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR), ':mdp'=>array($user->getPassword(), PDO::PARAM_STR)));
         $results=$this->con->getResults();
 
         foreach($results as $row){
-            $connectedUser['email']=$row['mail'];
             if($row['isAdmin']===1){
                 return "test";
             }

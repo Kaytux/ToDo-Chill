@@ -18,7 +18,5 @@ $vues['signIn']='vues/signIn.php';
 $vues['logIn']='vues/logIn.php';
 $vues['mainPage']='vues/mainPage.php';
 $vues['adminPage']='vues/adminPage.php';
-
-$connectedUser = array();
-$connectedUser['email'] = "unknown";
+$vues['connectedPage']='vues/oldHomePage.php';
 ?>

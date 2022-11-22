@@ -3,7 +3,7 @@
 class FrontControler{
     
     function __construct(){
-        global $rep, $vues;
+        global $rep, $vues, $connectedUser;
 
         $dVueError = array();
         $listeAction_Admin = array('deconnecter', 'supprimer', 'ajouter');
@@ -28,7 +28,6 @@ class FrontControler{
                     $this->connection();
                     break;
                 default:
-                    $this->Reinit();
                     break;
             }
 
