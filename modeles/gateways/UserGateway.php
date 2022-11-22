@@ -7,7 +7,7 @@ class UserGateway{
         $this->con=$con;
     }
 
-    public function addUserBdd(User $user){
+    public function addUserBdd(User $user, $isAdmin){
         $query='INSERT INTO Inscrit (mail, mdp) VALUES (:mail, :password)';
         $this->con->executeQuery($query, array(
             ':mail'=>array($user->getEmail(), PDO::PARAM_STR),
@@ -25,6 +25,9 @@ class UserGateway{
 
         foreach($results as $row){
             $connectedUser['email']=$row['mail'];
+            if($row['isAdmin']===true){
+                MdlAdmin::connection();
+            }
         }
         return true;
     }

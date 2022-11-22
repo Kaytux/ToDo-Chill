@@ -58,11 +58,17 @@ class AdminControler{
 
     function createUser(){
         global $dsn, $usr, $mdp;
-
+        
         $con = new Connection($dsn, $usr, $mdp);
-        $gateway = new UserGateway($con);
         $user = new User($_POST['email'], $_POST['password']);
-        $gateway->addUserBdd($user);
+
+        if(isset($_POST['isAdmin'])){
+            $gateway = new AdminGateway($con);
+            $gateway->createNewAdmin($user);
+        }else{
+            $gateway = new UserGateway($con);
+            $gateway->addUserBdd($user);
+        }
         return;
     }
 

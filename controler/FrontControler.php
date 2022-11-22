@@ -6,7 +6,7 @@ class FrontControler{
         global $rep, $vues;
 
         $listeAction_Admin = array('deconnecter', 'supprimer', 'ajouter');
-        // MdlAdmin::connection('admin', 'admin');
+        MdlAdmin::connection('admin', 'admin');
 
         try{
             $admin = MdlAdmin::isAdmin();

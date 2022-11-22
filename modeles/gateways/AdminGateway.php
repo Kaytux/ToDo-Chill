@@ -12,7 +12,7 @@ class AdminGateway{
             id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
             mail varchar(40),
             mdp varchar(40),
-            isAdmin boolean
+            isAdmin boolean default false
         );';
 
         $this->con->executeQueryWithoutParameters($query);
@@ -46,6 +46,14 @@ class AdminGateway{
 
         $query='DELETE FROM Inscrit';
         $this->con->executeQueryWithoutParameters($query);
+    }
+
+    function createNewAdmin($user){
+        $query='INSERT INTO Inscrit (mail, mdp, isAdmin) VALUES (:mail, :password, true)';
+        $this->con->executeQuery($query, array(
+            ':mail'=>array($user->getEmail(), PDO::PARAM_STR),
+            ':password'=>array($user->getPassword(), PDO::PARAM_STR)
+        ));
     }
 }
 
