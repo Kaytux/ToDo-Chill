@@ -5,6 +5,8 @@ class FrontControler{
     function __construct(){
         global $rep, $vues, $connectedUser;
 
+        session_start();
+
         $dVueError = array();
         $listeAction_Admin = array('deconnecter', 'supprimer', 'ajouter');
         // MdlAdmin::connection('admin', 'admin');
@@ -26,6 +28,10 @@ class FrontControler{
                     break;
                 case "connect":
                     $this->connection();
+                    break;
+                case "disconnectFromAdmin":
+                    MdlAdmin::deconnection();
+                    $this->Reinit();
                     break;
                 default:
                     break;
