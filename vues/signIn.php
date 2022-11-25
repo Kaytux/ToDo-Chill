@@ -3,28 +3,42 @@
 
 <head>
 	<meta charset="utf8"/>
-	<title>Inscription</title>
-	<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">
+	<title>Sign in</title>
+	<!--<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">-->
+    <link rel="stylesheet" href="styles/homePage.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/form.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
-	<form class="form-login" method="post">
-		<input class="form-entry" type="email" placeholder="Entrer votre email" name="email">
-		<input class="form-entry" type="password" placeholder="Entrer votre mot de passe" name="password">
-		<div>
-			<input class="btn form-validation-btn" type="submit" value="Valider"/>	
-			<input type="hidden" name="action" value="createUser"/>
-		</div>
+
+<body>	
+    <form method="post" class="btn-right-corner">
+		<input class="btn" type="submit" value="Continue as anonymous"/>	
+		<input type="hidden" name="action" value="continueAsAnonymous"/>
 	</form>
+    
+    <div class="form">
+		<h1 class="title">To-Do Chill</h1>
+        <div class="displayForm">
+            <h2 class="title">Créez votre compte</h2>
+            <form class="form" method="post">
+                <input class="form-entry" type="text" placeholder="Entrez votre email" name="email">
+            <input class="form-entry" type="password" placeholder="Entrez votre mot de passe" name="password">
+            <div>
+                <input class="btn form-validation-btn" type="submit" value="Valider"/>	
+                <input type="hidden" name="action" value="createNewAccount"/>
+            </div>
+            </form>
+        </div>
+    </div>
 
 	<?php
 		if(isset($dVueError) && count($dVueError) > 0){
 			foreach ($dVueError as $value){
-				echo "Error : $value <br>";
+				echo "<p class='title'>Error : $value</p> <br>";
 			}
 		}
 	?>
+
 </body>
+
 </html>

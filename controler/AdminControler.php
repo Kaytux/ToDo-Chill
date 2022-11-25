@@ -17,6 +17,10 @@ class AdminControler{
                 case NULL:
                     $this->Reinit();
                     break;
+                case "disconnectFromAdmin":
+                    MdlAdmin::deconnection();
+                    require($rep.$vues['homePage']);
+                    break;
                 case "createTableBdd":
                     $this->createTableBdd();
                     $this->Reinit();

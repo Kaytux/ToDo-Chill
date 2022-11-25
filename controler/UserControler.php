@@ -15,37 +15,19 @@ class UserControler{
             }        
             switch($action){
                 case NULL:
+                    $this->Reinit();
                     break;        
-                case "signIn":
+                case "connect":
+                    $this->connection();
+                    break;
+                case "SignIn":
                     require($rep.$vues['signIn']);
                     break;
-                case "logIn":
-                    require($rep.$vues['logIn']);
-                    break;
-                case "createUser":
-                    $this->validateRegisterForm();
-                    break;
-                case "accessAccount":
-                    $this->validateLoginForm();
-                    break;
-                case "signOut":
-                    $this->Reinit();
-                    break;
-                case "displayAskingNameDiv":
-                    $vueSpecificities['visibility'] = "display";
-                    require($rep.$vues['logIn']);
-                    break;
-                case "createNewList":
-                    $this->createNewList();
-                    require($rep.$vues['homePage']);
-                    break;
-                case "createAllBddTable":
-                    $this->createAllBddTable();
-                    break;
-                case "connect":
-                    require($rep.$vues['connectedPage']);
+                case "createNewAccount":
+                    $this->createNewAccount();
                     break;
                 default:
+                    echo "erreur page inconnue";
                     break;
             }
         }catch(PDOException $e){
@@ -56,25 +38,43 @@ class UserControler{
     
     function Reinit(){
         global $rep, $vues;
-        require($rep.$vues['logIn']); 
+        require($rep.$vues['homePage']);
     }
-
-    function validateRegisterForm(){
+    
+    function connection(){
         global $rep, $vues;
+        $email = $_POST['email'];
+        $mdp = $_POST['password'];
 
-        $email=$_POST['email'];
-        $password=$_POST['password'];
 
-        Validation::valideFormRegister($email, $password, $dVueError);
-
-        if(isset($dVueError['email']) || isset($dVueError['password'])){
-            require($rep.$vues['signIn']);
+        if(Validation::valideFormLogin($email, $mdp, $dVueError)){
+            if(isset($dVueError['spec'])){
+                MdlAdmin::connection($email, $mdp);
+                require($rep.$vues['adminPage']);
+                exit;
+            }
+            require($rep.$vues['userInterface']);
         }
         else{
-            require($rep.$vues['homePage']);
+            if(isset($dVueError['email']) || isset($dVueError['password'])){
+                require($rep.$vues['homePage']);
+            }
         }
     }
 
+    function createNewAccount(){
+        global $rep, $vues;
+        $email = $_POST['email'];
+        $mdp = $_POST['password'];
+
+        if(Validation::valideFormRegister($email, $mdp, $dVueError)){
+            require($rep.$vues['homePage']);
+        }else{
+            require($rep.$vues['signIn']);
+        }
+    }
+
+    /*
     function validateLoginForm(){
         global $rep, $vues;
 
@@ -106,7 +106,7 @@ class UserControler{
         $gateway->createTable();
         return;
     }
-
+    */
     } // fin classe
 
 ?>

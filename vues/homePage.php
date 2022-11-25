@@ -20,21 +20,27 @@
 		<h1 class="title">To-Do Chill</h1>
         <div class="displayForm">
             <h2 class="title">Connectez vous</h2>
-            <form class="form-login" method="post">
-            <input class="form-entry" type="text" placeholder="Entrez votre email" name="email">
+            <form class="form" method="post">
+                <input class="form-entry" type="text" placeholder="Entrez votre email" name="email">
             <input class="form-entry" type="password" placeholder="Entrez votre mot de passe" name="password">
             <div>
                 <input class="btn form-validation-btn" type="submit" value="Connexion"/>	
                 <input type="hidden" name="action" value="connect"/>
             </div>
             </form>
+            <div>
+                <form method="post">
+                    <input type="submit" value="Pas de compte ?"/>	
+                    <input type="hidden" name="action" value="SignIn"/>
+                </form>
+            </div>
         </div>
     </div>
 
 	<?php
 		if(isset($dVueError) && count($dVueError) > 0){
 			foreach ($dVueError as $value){
-				echo "Error : $value <br>";
+				echo "<p class='title'>Error : $value</p> <br>";
 			}
 		}
 	?>

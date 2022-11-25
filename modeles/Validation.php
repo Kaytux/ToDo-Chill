@@ -2,22 +2,23 @@
 
 class Validation{
     
-    static function valideFormRegister(&$email, &$password, &$dataVueError){
+    static function valideFormRegister(&$email, &$password, &$dataVueError):bool{
         global $dsn,$usr,$mdp;
         if(!isset($email) || $email==""){
             $dataVueError['email'] = "veuillez renseigner un email";
-            return;
+            return false;
         }
 
         if(!isset($password) || $password==""){
             $dataVueError['password'] = "Veuillez renseigner un mot de passe";
-            return;
+            return false;
         }
 
         $con = new Connection($dsn, $usr, $mdp);
         $gateway = new UserGateway($con);
         $user = new User($email, $password);
         $gateway->addUserBdd($user);
+        return true;
     }
 
     static function valideFormLogin(&$email, &$password, &$dataVueError):bool{
