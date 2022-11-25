@@ -26,6 +26,10 @@ class UserControler{
                 case "createNewAccount":
                     $this->createNewAccount();
                     break;
+                case "disconnectFromUser":
+                    MdlUser::deconnection();
+                    require($rep.$vues['homePage']);
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -53,6 +57,7 @@ class UserControler{
                 require($rep.$vues['adminPage']);
                 exit;
             }
+            MdlUser::connection($email, $mdp);
             require($rep.$vues['userInterface']);
         }
         else{

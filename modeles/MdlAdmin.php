@@ -12,7 +12,7 @@
         }
 
         public static function isAdmin(){
-            if(isset($_SESSION['login']) && isset($_SESSION['role'])){
+            if(isset($_SESSION['login']) && isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){
                 return new Admin($_SESSION['login'], $_SESSION['role']);
             }
             return null;

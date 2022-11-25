@@ -17,7 +17,7 @@ class Autoload{
     private static function _autoload($class){
         global $rep;
         $filename = $class.'.php';
-        $dir=array("modeles/","./","config/","controler/","modeles/gateways/");
+        $dir=array("modeles/","./","config/","controler/","modeles/gateways/","modeles/metiers/");
         
         foreach($dir as $d){
             $file=$rep.$d.$filename;
