@@ -30,6 +30,9 @@ class UserControler{
                     MdlUser::deconnection();
                     require($rep.$vues['homePage']);
                     break;
+                case "addAList":
+                    $this->addAList();
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -46,7 +49,7 @@ class UserControler{
     }
     
     function connection(){
-        global $rep, $vues;
+        global $rep, $vues, $connectedUser;
         $email = $_POST['email'];
         $mdp = $_POST['password'];
 
@@ -58,6 +61,8 @@ class UserControler{
                 exit;
             }
             MdlUser::connection($email, $mdp);
+            $connectedUser['user'] = new User($email);
+            echo($connectedUser['user']);
             require($rep.$vues['userInterface']);
         }
         else{
@@ -79,21 +84,17 @@ class UserControler{
         }
     }
 
-    /*
-    function validateLoginForm(){
-        global $rep, $vues;
-
-        $email=$_POST['email'];
-        $password=$_POST['password'];
-
-        if(Validation::valideFormLogin($email, $password, $dVueError)){
-                require($rep.$vues['mainPage']);
-        }else{
-            require($rep.$vues['logIn']);
-        }
+    function addAList(){
+        global $rep, $vues, $connectedUser;
+        echo ($connectedUser['user']);
+        $name = $_POST['name'];
+        $list= new TaskList($name);
+        $connectedUser->addAList($list);
+        require($rep.$vues['userInterface']);
     }
 
-    function createNewList(){
+       /*
+       function createNewList(){
         global $dsn, $usr, $mdp, $connectedUser;
 
         $name = $_POST['listName'];

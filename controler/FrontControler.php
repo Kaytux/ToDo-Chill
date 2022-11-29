@@ -7,8 +7,6 @@ class FrontControler{
 
         session_start();
 
-        $listeAction_Admin = array('deconnecter', 'supprimer', 'ajouter');
-
         // MdlAdmin::connection('admin', 'admin');
         // MdlAdmin::deconnection();
 

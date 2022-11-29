@@ -11,7 +11,7 @@ class UserGateway{
         $query='INSERT INTO Inscrit (mail, mdp) VALUES (:mail, :password)';
         $this->con->executeQuery($query, array(
             ':mail'=>array($user->getEmail(), PDO::PARAM_STR),
-            ':password'=>array($user->getPassword(), PDO::PARAM_STR)
+            ':password'=>array($user->getEmail(), PDO::PARAM_STR) // TODO
         ));
     }
 
@@ -19,7 +19,8 @@ class UserGateway{
         global $connectedUser;
         $query='SELECT * FROM Inscrit where mail=:mail AND mdp=:mdp';
 
-        $this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR), ':mdp'=>array($user->getPassword(), PDO::PARAM_STR)));
+        //TODO
+        $this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR), ':mdp'=>array($user->getEmail(), PDO::PARAM_STR)));
         $results=$this->con->getResults();
 
         foreach($results as $row){
