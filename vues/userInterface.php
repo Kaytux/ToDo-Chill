@@ -21,11 +21,9 @@
 	</form>
 
 	<?php
-		if(isset($dVue['data']) && (count($dVue['data'])) > 0){
-			foreach($dVue['data'] as $row){
+			foreach($dVue as $row){
 				echo $row;
 			}
-		}
 	?>
 
 </body>

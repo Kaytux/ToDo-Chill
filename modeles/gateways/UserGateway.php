@@ -32,7 +32,7 @@ class UserGateway{
     }
 
     public function getData($email){
-        $query='SELECT * FROM TasksList WHERE idUser=:id';
+        $query='SELECT * FROM TasksList WHERE mailUser=:id';
         $this->con->executeQuery($query, array(':id'=>array($email, PDO::PARAM_STR)));
         return $this->con->getResults();
     }

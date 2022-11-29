@@ -7,6 +7,7 @@ class UserControler{
         global $rep,$vues;
 
         $dVueError = array();
+        $dVue = array();
 
         try{
             if(isset($_REQUEST['action'])){
@@ -63,11 +64,7 @@ class UserControler{
                 exit;
             }
             MdlUser::connection($email, $mdp);
-            $data = MdlUser::getData($email);
-            $dVue = array('nom'=>$email, 'data'=>$data);
-            foreach($dVue['data'] as $row){
-				echo $row;
-			}
+            $dVue['news'] = "HAAAAAA";
             require($rep.$vues['userInterface']);
         }
         else{

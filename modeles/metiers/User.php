@@ -2,11 +2,10 @@
 
 class User{
     private string $email;
-    private array $taskList;
+    private $taskList=array();
 
     function __construct($email){
         $this->email=$email;
-        $taskList = array();
     }
 
     public function getEmail():string{
@@ -14,10 +13,13 @@ class User{
     }
 
     public function addAList($list){
-        array_push($this->taskList, $list);
+        array_push($this->taskList, $list);    
+        print_r($this->taskList);
+        echo "<br>";
     }
 
     public function getTaskList(){
+        print_r($this->taskList);
         return $this->taskList;
     }
 
