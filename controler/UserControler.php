@@ -6,6 +6,8 @@ class UserControler{
 
         global $rep,$vues;
 
+        $dVueError = array();
+
         try{
             if(isset($_REQUEST['action'])){
                 $action=$_REQUEST['action'];
@@ -49,7 +51,7 @@ class UserControler{
     }
     
     function connection(){
-        global $rep, $vues, $connectedUser;
+        global $rep, $vues;
         $email = $_POST['email'];
         $mdp = $_POST['password'];
 
@@ -61,8 +63,11 @@ class UserControler{
                 exit;
             }
             MdlUser::connection($email, $mdp);
-            $connectedUser['user'] = new User($email);
-            echo($connectedUser['user']);
+            $data = MdlUser::getData($email);
+            $dVue = array('nom'=>$email, 'data'=>$data);
+            foreach($dVue['data'] as $row){
+				echo $row;
+			}
             require($rep.$vues['userInterface']);
         }
         else{
@@ -85,16 +90,16 @@ class UserControler{
     }
 
     function addAList(){
-        global $rep, $vues, $connectedUser;
-        echo ($connectedUser['user']);
+        global $rep, $vues;
         $name = $_POST['name'];
         $list= new TaskList($name);
+        $connectedUser = $_SESSION['role'];
         $connectedUser->addAList($list);
         require($rep.$vues['userInterface']);
     }
 
-       /*
-       function createNewList(){
+    /*
+    function createNewList(){
         global $dsn, $usr, $mdp, $connectedUser;
 
         $name = $_POST['listName'];

@@ -18,6 +18,4 @@ $vues['signIn']='vues/signIn.php';
 $vues['mainPage']='vues/mainPage.php';
 $vues['adminPage']='vues/adminPage.php';
 $vues['userInterface']='vues/userInterface.php';
-
-$connectedUser['user'] = "oui";
 ?>

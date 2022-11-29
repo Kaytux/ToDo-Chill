@@ -16,7 +16,6 @@ class UserGateway{
     }
 
     public function searchUserIdentidiant(User $user){
-        global $connectedUser;
         $query='SELECT * FROM Inscrit where mail=:mail AND mdp=:mdp';
 
         //TODO
@@ -30,6 +29,12 @@ class UserGateway{
             return "true";
         }
         return "false";
+    }
+
+    public function getData($email){
+        $query='SELECT * FROM TasksList WHERE idUser=:id';
+        $this->con->executeQuery($query, array(':id'=>array($email, PDO::PARAM_STR)));
+        return $this->con->getResults();
     }
 }
 ?>

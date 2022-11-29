@@ -6,6 +6,7 @@ class User{
 
     function __construct($email){
         $this->email=$email;
+        $taskList = array();
     }
 
     public function getEmail():string{

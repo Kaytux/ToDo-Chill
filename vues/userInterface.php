@@ -21,14 +21,12 @@
 	</form>
 
 	<?php
-	global $connectedUser;
-	if($connectedUser['user']->isListSet()){
-		$lists=$connectedUser->getTaskList();
-		foreach($lists as $row){
-			echo $row['name'];
+		if(isset($dVue['data']) && (count($dVue['data'])) > 0){
+			foreach($dVue['data'] as $row){
+				echo $row;
+			}
 		}
-	}
-
 	?>
+
 </body>
 </html>
