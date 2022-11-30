@@ -3,6 +3,7 @@
   --color-primary : #EBC7E8;
   --color-background-primary: #645CAA;
   --color-background-secondary: rgba(167, 224, 224, 0.3);
+  --color-background-secondary-hover: rgb(135, 255, 255);
   --color-text-primary: #FFE5B4;
   --transparent-color: transparent;
 }

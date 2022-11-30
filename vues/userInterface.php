@@ -21,10 +21,10 @@
 			<?php
 				if(isset($dVue) && count($dVue) > 0){
 					foreach($dVue['list'] as $row){
-						$test = $row['name'];
-						echo "<form class='list-texte-container'>
-								<p>$test</p>
-								<input type='hidden' name='haaa' value='haaa'>
+						$disp = $row['name'];
+						echo "<form class='list-form-container'>
+								<input class='list-text-container'type='submit' value=$disp>
+								<input type='hidden' name='action' value='test'>
 							</form>";
 					}
 				}
@@ -36,6 +36,12 @@
 			<input type="hidden" name="action" value="addAList"/>
 		</form>
 	</div>
-
+	<?php
+		if(isset($dVue) && count($dVue) > 0){
+			foreach($dVue['task'] as $row){
+				echo $row['name'];
+			}
+		}
+	?>
 </body>
 </html>

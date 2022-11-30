@@ -62,6 +62,7 @@ class UserControler{
             }
             MdlUser::connection($email);
             $dVue['list'] = MdlUser::getData($email);
+            $dVue['task'] = MdlUser::getDataTask($dVue['list'][0]);
             require($rep.$vues['userInterface']);
         }
         else{

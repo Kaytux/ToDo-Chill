@@ -28,7 +28,18 @@
     border-radius: 10rem;
 }
 
-.list-texte-container{
+.list-text-container{
     font-size: 1.5rem;
-    color: black;
+    background-color: var(--color-background-secondary);
+    border-radius: 10px;
+    border-color: transparent;
+    transition: 1s;
+}
+
+.list-text-container:hover{
+    background-color: var(--color-background-secondary-hover);
+}
+
+.list-form-container{
+    padding: 0.5rem;
 }

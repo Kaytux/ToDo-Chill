@@ -23,6 +23,17 @@
             $gateway->createNewListBdd($user, $task->getListName());
         }
 
+        public static function getDataTask($idTask){
+            global $dsn, $usr, $mdp;
+            $id = $idTask['id'];
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new TaskGateway($con);
+            $data = $gateway->getTaskFromList($id);
+
+            return $data;
+        }
+
         /*
         public function isListSet(){
             $taskList = $this->user->getTaskList();
