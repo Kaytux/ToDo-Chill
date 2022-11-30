@@ -22,9 +22,9 @@
 				if(isset($dVue) && count($dVue) > 0){
 					foreach($dVue['list'] as $row){
 						$disp = $row['name'];
-						echo "<form class='list-form-container'>
-								<input class='list-text-container'type='submit' value=$disp>
-								<input type='hidden' name='action' value='test'>
+						echo "<form method='post' class='list-form-container'>
+								<input class='list-text-container' type='submit' value=$disp name='listTargeted'>
+								<input type='hidden' name='action' value='targetAList'>
 							</form>";
 					}
 				}
@@ -37,7 +37,7 @@
 		</form>
 	</div>
 	<?php
-		if(isset($dVue) && count($dVue) > 0){
+		if(isset($dVue['task']) && count($dVue) > 0){
 			foreach($dVue['task'] as $row){
 				echo $row['name'];
 			}

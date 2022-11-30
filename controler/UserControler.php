@@ -33,6 +33,9 @@ class UserControler{
                 case "addAList":
                     $this->addAList();
                     break;
+                case "targetAList":
+                    $this->changeTargetedList();
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -62,8 +65,8 @@ class UserControler{
             }
             MdlUser::connection($email);
             $dVue['list'] = MdlUser::getData($email);
-            $dVue['task'] = MdlUser::getDataTask($dVue['list'][0]);
-            require($rep.$vues['userInterface']);
+            $_SESSION['list'] = $dVue['list'][0]['name'];
+            $this->loadData();
         }
         else{
             if(isset($dVueError['email']) || isset($dVueError['password'])){
@@ -89,10 +92,20 @@ class UserControler{
         $name = $_POST['name'];
         $task = new TaskList($name);
         MdlUser::addAListToUser($_SESSION['login'],$task);
+        $this->loadData();
+    }
+
+    function loadData(){
+        global $rep, $vues;
         $dVue['list'] = MdlUser::getData($_SESSION['login']);
+        $dVue['task'] = MdlUser::getDataTask($_SESSION['list']);
         require($rep.$vues['userInterface']);
     }
 
+    function changeTargetedList(){
+        $_SESSION['list'] = $_POST['listTargeted'];
+        $this->loadData();
+    }
     /*
     function createNewList(){
         global $dsn, $usr, $mdp, $connectedUser;

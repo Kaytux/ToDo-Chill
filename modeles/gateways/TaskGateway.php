@@ -15,9 +15,14 @@ class TaskGateway{
     }
 
     public function getTaskFromList($id){
-        echo $id;
         $query='SELECT * FROM Task WHERE idTasksList=:id';
         $this->con->executeQuery($query, array(':id'=>array($id, PDO::PARAM_INT)));
+        return $this->con->getResults();
+    }
+
+    public function getIdFromListName($name){
+        $query='SELECT id FROM TasksList WHERE name=:name';
+        $this->con->executeQuery($query, array(':name'=>array($name, PDO::PARAM_STR)));
         return $this->con->getResults();
     }
 }

@@ -25,31 +25,15 @@
 
         public static function getDataTask($idTask){
             global $dsn, $usr, $mdp;
-            $id = $idTask['id'];
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
-            $data = $gateway->getTaskFromList($id);
+            $id = $gateway->getIdFromListName($idTask);
+            $data = $gateway->getTaskFromList($id[0]['id']);
 
             return $data;
         }
-
-        /*
-        public function isListSet(){
-            $taskList = $this->user->getTaskList();
-            if(isset($taskList) && count($taskList)>0){return true;}
-            return false;
-        }
-
-        public function getList(){
-            return $this->user->getTaskList();
-        }
-
-        public function addAList($list){
-            $this->user->addAList($list);
-        }
-        */
-
+        
         public static function deconnection(){
             session_unset();
             session_destroy();
