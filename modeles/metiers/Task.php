@@ -8,6 +8,10 @@ class Task{
         $this->name=$name;
         $this->isComppleted=false;
     }
+
+    public function getTaskName(){
+        return $this->name;
+    }
 }
 
 ?>

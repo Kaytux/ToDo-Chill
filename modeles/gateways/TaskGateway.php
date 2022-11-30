@@ -22,7 +22,7 @@ class TaskGateway{
     }
 
     public function createNewListBdd($userMail, $newListName){
-        $query='INSERT INTO TasksList (idUser, name) VALUES ((SELECT i.id FROM Inscrit i WHERE i.mail=:mail), :name)';
+        $query='INSERT INTO TasksList (name, mailUser) VALUES (:name, :mail)';
         $this->con->executeQuery($query, array(':mail'=>array($userMail, PDO::PARAM_STR), 
                                                 ':name'=>array($newListName, PDO::PARAM_STR)));
         return;

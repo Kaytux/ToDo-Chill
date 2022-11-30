@@ -4,10 +4,7 @@ class UserControler{
     
     function __construct(){
 
-        global $rep,$vues;
-
-        $dVueError = array();
-        $dVue = array();
+        global $rep,$vues,$idUser;
 
         try{
             if(isset($_REQUEST['action'])){
@@ -52,7 +49,7 @@ class UserControler{
     }
     
     function connection(){
-        global $rep, $vues;
+        global $rep, $vues, $idUser;
         $email = $_POST['email'];
         $mdp = $_POST['password'];
 
@@ -63,8 +60,8 @@ class UserControler{
                 require($rep.$vues['adminPage']);
                 exit;
             }
-            MdlUser::connection($email, $mdp);
-            $dVue['news'] = "HAAAAAA";
+            MdlUser::connection($email);
+            $dVue['list'] = MdlUser::getData($email);
             require($rep.$vues['userInterface']);
         }
         else{
@@ -87,11 +84,11 @@ class UserControler{
     }
 
     function addAList(){
-        global $rep, $vues;
+        global $rep, $vues, $idUser;
         $name = $_POST['name'];
-        $list= new TaskList($name);
-        $connectedUser = $_SESSION['role'];
-        $connectedUser->addAList($list);
+        $task = new TaskList($name);
+        MdlUser::addAListToUser($_SESSION['login'],$task);
+        $dVue['list'] = MdlUser::getData($_SESSION['login']);
         require($rep.$vues['userInterface']);
     }
 

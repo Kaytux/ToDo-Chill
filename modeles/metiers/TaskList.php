@@ -11,6 +11,10 @@ class TaskList{
     public function addATask($task){
         array_push($this->tasks, $task);
     }
+
+    public function getListName(){
+        return $this->name;
+    }
 }
 
 ?>
