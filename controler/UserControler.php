@@ -5,6 +5,14 @@ class UserControler{
     function __construct(){
 
         global $rep,$vues,$idUser;
+        
+        try{
+            
+            require ($rep.$vues['userInterface']);
+            exit;
+        }catch(PDOException $e){
+            echo "$e";
+        }
 
         try{
             if(isset($_REQUEST['action'])){
@@ -56,6 +64,11 @@ class UserControler{
         $email = $_POST['email'];
         $mdp = $_POST['password'];
 
+        if(isset($_GET['page'])){
+            $dVue['page'] = $_GET['page'];
+        }else{
+            $dVue['page'] = 1;
+        }
 
         if(Validation::valideFormLogin($email, $mdp, $dVueError)){
             if(isset($dVueError['spec'])){
