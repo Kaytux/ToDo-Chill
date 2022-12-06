@@ -16,26 +16,20 @@ class UserGateway{
         return true;
     }
 
-    public function searchUserIdentidiant(User $user){
-        $query='SELECT * FROM Inscrit where mail=:mail AND mdp=:mdp';
-
-        //TODO
-        $this->con->executeQuery($query, array(':mail'=>array($user->getEmail(), PDO::PARAM_STR), ':mdp'=>array($user->getEmail(), PDO::PARAM_STR)));
-        $results=$this->con->getResults();
-
-        foreach($results as $row){
-            if($row['isAdmin']===1){
-                return "test";
-            }
-            return "true";
-        }
-        return "false";
-    }
-
     public function getData($email){
         $query='SELECT * FROM TasksList WHERE mailUser=:id';
         $this->con->executeQuery($query, array(':id'=>array($email, PDO::PARAM_STR)));
         return $this->con->getResults();
+    }
+    
+    public function getCredentials($email){
+        $query='SELECT mdp FROM Inscrit WHERE mail=:login';
+        if($this->con->executeQuery($query, array(':login'=>array($email, PDO::PARAM_STR)))){
+            $results = $this->con->getResults();
+            return $results[0];
+        }else{
+            throw newException();
+        }
     }
 }
 ?>

@@ -1,8 +1,22 @@
 <?php
     class MdlUser{
-        public static function connection($login){
-            $_SESSION['role'] =  'user';
-            $_SESSION['login'] = $login;
+        public static function connection($login, $password){
+            global $dsn, $usr, $mdp;
+
+            $mail = Validation::clean($login);
+            $password = Validation::clean($password);
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new UserGateway($con);
+            $hash = $gateway->getCredentials($mail);
+                
+            if(password_verify($password, $hash['mdp'])){
+                $_SESSION['login'] = $mail;
+                $_SESSION['role'] = 'admin';
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public static function getData($mail){
