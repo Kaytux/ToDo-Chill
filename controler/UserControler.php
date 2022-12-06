@@ -56,7 +56,6 @@ class UserControler{
         global $rep, $vues;
         if(MdlAdmin::connection($_POST['email'], $_POST['password'], $dVueError)){
             require($rep.$vues['adminPage']);
-            exit;
         }elseif(MdlUser::connection($_POST['email'], $_POST['password'], $dVueError)){
             require($rep.$vues['userInterface']);
         }else{

@@ -6,6 +6,8 @@
             $mail = Validation::clean($login);
             $password = Validation::clean($password);
 
+            if(!Validation::valideForm($mail, $password, $dVue)){return false;}
+
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new AdminGateway($con);
             $hash = $gateway->getCredentials($mail);
