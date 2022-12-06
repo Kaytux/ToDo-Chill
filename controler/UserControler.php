@@ -5,14 +5,6 @@ class UserControler{
     function __construct(){
 
         global $rep,$vues,$idUser;
-        
-        try{
-            
-            require ($rep.$vues['userInterface']);
-            exit;
-        }catch(PDOException $e){
-            echo "$e";
-        }
 
         try{
             if(isset($_REQUEST['action'])){

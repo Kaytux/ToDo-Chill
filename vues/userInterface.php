@@ -11,21 +11,12 @@
 	<link rel="stylesheet" href="styles/userInterface.css">
 </head>
 <body>	
-	<?php
-		echo $dVue['page'];
-	?>
 	<form method="post" class="btn-right-corner">
 		<input class="btn" type="submit" value="Se deconnecter"/>	
 		<input type="hidden" name="action" value="disconnectFromUser"/>
 	</form>
-
 	<div class="list-container">
 		<div class="list-name-container">
-			<?php 
-				for($i=1;$i<=count($dVue['list']);$i++){
-					echo "<a href='index.php?page=".$i."'>".$i."</a>";
-				}
-			?>
 			<?php
 				if(isset($dVue) && count($dVue) > 0){
 					foreach($dVue['list'] as $row){
