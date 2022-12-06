@@ -1,8 +1,22 @@
 <?php
     class MdlAdmin{
-        public static function connection($login, $mdp){
-            $_SESSION['role'] =  'admin';
-            $_SESSION['login'] = $login;
+        public static function connection($login, $password, &$dVue){
+            global $dsn, $usr, $mdp;
+
+            $mail = Validation::clean($login);
+            $password = Validation::clean($password);
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new AdminGateway($con);
+            $hash = $gateway->getCredentials($mail);
+                
+            if(password_verify($password, $hash['mdp']) && $hash['isAdmin']===1){
+                $_SESSION['login'] = $mail;
+                $_SESSION['role'] = 'admin';
+                return true;
+            }else{
+                return false;
+            }
         }
 
         public static function deconnection(){

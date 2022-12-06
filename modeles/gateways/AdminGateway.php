@@ -60,6 +60,16 @@ class AdminGateway{
         $query='DROP TABLE Task; DROP TABLE TasksList; DROP TABLE Inscrit';
         $this->con->executeQueryWithoutParameters($query);
     }
+
+    function getCredentials($email){
+        $query='SELECT mdp, isAdmin FROM Inscrit WHERE mail=:login';
+        if($this->con->executeQuery($query, array(':login'=>array($email, PDO::PARAM_STR)))){
+            $results = $this->con->getResults();
+            return $results[0];
+        }else{
+            throw newException();
+        }
+    }
 }
 
 ?>

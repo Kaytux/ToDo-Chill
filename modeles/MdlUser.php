@@ -23,6 +23,26 @@
             $gateway->createNewListBdd($user, $task->getListName());
         }
 
+        public static function createNewAccount($login, $email, &$dVue){
+            global $dsn, $usr, $mdp;
+
+            if(!Validation::valideForm($login, $email, $dVue)){
+                return false;
+            }
+
+            $mail = htmlspecialchars($login);
+            $pass = password_hash(htmlspecialchars($email),PASSWORD_DEFAULT);
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new UserGateway($con);
+            if($gateway->addUserBdd($mail, $pass)){
+                return true;
+            }else{
+                $dVue['error'] = 'impossible de se connecter à la bdd';
+                return false;
+            }
+        }
+
         public static function getDataTask($idTask){
             global $dsn, $usr, $mdp;
 
