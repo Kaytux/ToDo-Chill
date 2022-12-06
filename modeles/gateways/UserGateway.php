@@ -7,12 +7,13 @@ class UserGateway{
         $this->con=$con;
     }
 
-    public function addUserBdd(User $user){
+    public function addUserBdd($email, $mdp){
         $query='INSERT INTO Inscrit (mail, mdp) VALUES (:mail, :password)';
         $this->con->executeQuery($query, array(
-            ':mail'=>array($user->getEmail(), PDO::PARAM_STR),
-            ':password'=>array($user->getEmail(), PDO::PARAM_STR) // TODO
+            ':mail'=>array($email, PDO::PARAM_STR),
+            ':password'=>array($mdp, PDO::PARAM_STR) // TODO
         ));
+        return true;
     }
 
     public function searchUserIdentidiant(User $user){
