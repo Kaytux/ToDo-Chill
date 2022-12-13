@@ -10,7 +10,10 @@
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new AdminGateway($con);
-            $hash = $gateway->getCredentials($mail);
+            if(!($hash = $gateway->getCredentials($mail))){
+                $dVue['email'] = "email inconnue";
+                return false;
+            }
                 
             if(password_verify($password, $hash['mdp']) && $hash['isAdmin']===1){
                 $_SESSION['login'] = $mail;

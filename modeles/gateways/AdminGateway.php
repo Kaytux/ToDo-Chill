@@ -65,6 +65,9 @@ class AdminGateway{
         $query='SELECT mdp, isAdmin FROM Inscrit WHERE mail=:login';
         if($this->con->executeQuery($query, array(':login'=>array($email, PDO::PARAM_STR)))){
             $results = $this->con->getResults();
+            if(count($results) == 0){
+                return false;
+            }
             return $results[0];
         }else{
             throw newException();

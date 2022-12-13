@@ -1,6 +1,6 @@
 <?php
     class MdlUser{
-        public static function connection($login, $password){
+        public static function connection($login, $password, &$dVue){
             global $dsn, $usr, $mdp;
 
             $mail = Validation::clean($login);
@@ -10,33 +10,44 @@
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new UserGateway($con);
-            $hash = $gateway->getCredentials($mail);
+            if(!$hash = $gateway->getCredentials($mail)){
+                return false;
+            }
                 
             if(password_verify($password, $hash['mdp'])){
                 $_SESSION['login'] = $mail;
                 $_SESSION['role'] = 'admin';
+                $_SESSION['list'] = MdlUser::getData($mail);
+                var_dump($_SESSION['list'][0]);
+                $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
                 return true;
             }else{
+                $dVue['credentials'] = "mot de passe incorect";
                 return false;
             }
         }
 
         public static function getData($mail){
             global $dsn, $usr, $mdp;
-
+            $results = array();
+            
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new UserGateway($con);
             $data = $gateway->getData($mail);
-
-            return $data;
+            foreach($data as $row){
+                array_push($results, new TaskList($row['id'], $row['name'], $row['mailUser']));
+            }
+            return $results;
         }
 
-        public static function addAListToUser($user, $task){
+        public static function addAListToUser($task){
             global $dsn, $usr, $mdp;
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
-            $gateway->createNewListBdd($user, $task->getListName());
+            $list = new TaskList($task, $_SESSION['login']);
+            $gateway->createNewListBdd($list);
+            $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
         }
 
         public static function createNewAccount($login, $email, &$dVue){
@@ -59,13 +70,12 @@
             }
         }
 
-        public static function getDataTask($idTask){
+        public static function getDataTask($idList){
             global $dsn, $usr, $mdp;
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
-            $id = $gateway->getIdFromListName($idTask);
-            $data = $gateway->getTaskFromList($id[0]['id']);
+            $data = $gateway->getTaskFromList($idList);
 
             return $data;
         }

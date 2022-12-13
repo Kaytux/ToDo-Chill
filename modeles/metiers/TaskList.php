@@ -1,18 +1,29 @@
 <?php
 
 class TaskList{
+    private string $id;
     private string $name;
-    private array $tasks;
+    private string $userMail;
 
-    public function __construct($name){
+    public function __construct($id ,$name, $userMail){
+        $this->id=$id;
         $this->name=$name;
+        $this->userMail=$userMail;
     }
 
-    public function addATask($task){
-        array_push($this->tasks, $task);
+    public function getName(){
+        return $this->name;
     }
 
-    public function getListName(){
+    public function getUserMail(){
+        return $this->userMail;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function __toString(){
         return $this->name;
     }
 }

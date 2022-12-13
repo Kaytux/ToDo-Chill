@@ -18,11 +18,12 @@
 	<div class="list-container">
 		<div class="list-name-container">
 			<?php
-				if(isset($dVue) && count($dVue) > 0){
-					foreach($dVue['list'] as $row){
-						$disp = $row['name'];
+				if(isset($_SESSION['list']) && count($_SESSION['list']) > 0){
+					foreach($_SESSION['list'] as $row){
+						$id = $row->getId();
 						echo "<form method='post' class='list-form-container'>
-								<input class='list-text-container' type='submit' value=$disp name='listTargeted'>
+								<input class='list-text-container' type='submit' value='$row' name='listTargeted'>
+								<input type='hidden' name='id' value='$id'>
 								<input type='hidden' name='action' value='targetAList'>
 							</form>";
 					}
@@ -37,8 +38,8 @@
 	</div>
 	<div class="task-container">
 		<?php
-			if(isset($dVue['task']) && count($dVue) > 0){
-				foreach($dVue['task'] as $row){
+			if(isset($_SESSION['task']) && count($_SESSION['task']) > 0){
+				foreach($_SESSION['task'] as $row){
 					$disp = $row['name'];
 					echo "<p>$disp</p>";
 				}

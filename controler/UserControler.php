@@ -73,23 +73,16 @@ class UserControler{
     }
 
     function addAList(){
-        global $rep, $vues, $idUser;
-        $name = $_POST['name'];
-        $task = new TaskList($name);
-        MdlUser::addAListToUser($_SESSION['login'],$task);
-        $this->loadData();
-    }
-
-    function loadData(){
         global $rep, $vues;
-        $dVue['list'] = MdlUser::getData($_SESSION['login']);
-        $dVue['task'] = MdlUser::getDataTask($_SESSION['list']);
+        $name = $_POST['name'];
+        MdlUser::addAListToUser($name);
         require($rep.$vues['userInterface']);
     }
 
     function changeTargetedList(){
-        $_SESSION['list'] = $_POST['listTargeted'];
-        $this->loadData();
+        global $rep, $vues;
+        $_SESSION['task'] = MdlUser::getDataTask($_POST['id']);
+        require($rep.$vues['userInterface']);
     }
 } // fin classe
 
