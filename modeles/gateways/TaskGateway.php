@@ -30,10 +30,13 @@ class TaskGateway{
         return;
     }
 
-    public function checkTaskBdd($id){
-        $query='UPDATE Task SET status=1 WHERE id=:id';
+    public function changeTaskStatus($id, $status){
+        $query='UPDATE Task SET status=:status WHERE id=:id';
 
-        $this->con->executeQuery($query, array(':id'=>array($id, PDO::PARAM_STR)));
+        $this->con->executeQuery($query, array(
+            ':id'=>array($id, PDO::PARAM_STR),
+            ':status'=>array($status, PDO::PARAM_STR)
+        ));
         return;
     }
 }

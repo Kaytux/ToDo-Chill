@@ -94,16 +94,16 @@
             return $results;
         }
         
-        public static function checkTask($id){
+        public static function changeStatus($id, $status){
             global $dsn, $usr, $mdp;
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
-            $gateway->checkTaskBdd($id);
+            $gateway->changeTaskStatus($id, $status);
 
             $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
-        
+
         public static function deconnection(){
             session_unset();
             session_destroy();

@@ -63,8 +63,8 @@
 					<?php
 						if($row->getStatus()==1){
 					?>
-					<input type="checkbox" onChange="submit() checked">
-					<input type="hidden" name="action" value="checkTask">
+					<input type="checkbox" onChange="submit()" checked>
+					<input type="hidden" name="action" value="uncheckTask">
 					<input type="hidden" name="id" value=<?=$id?>> 
 					<h2 style="text-decoration:line-through;"><?=$name?></h2>
 					<?php
