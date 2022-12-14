@@ -1,9 +1,9 @@
 <?php
 
 class TaskList{
-    private string $id;
-    private string $name;
-    private string $userMail;
+    private $id;
+    private $name;
+    private $userMail;
 
     public function __construct($id ,$name, $userMail){
         $this->id=$id;

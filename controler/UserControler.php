@@ -40,6 +40,9 @@ class UserControler{
                 case "addATask":
                     $this->addATask();
                     break;
+                case "checkTask":
+                    $this->checkTask();
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -92,6 +95,12 @@ class UserControler{
     function addATask(){
         global $rep, $vues;
         MdlUser::addATask($_POST['name']);
+        require($rep.$vues['userInterface']);
+    }
+
+    function checkTask(){
+        global $rep, $vues;
+        MdlUser::checkTask($_POST['id']);
         require($rep.$vues['userInterface']);
     }
 } // fin classe

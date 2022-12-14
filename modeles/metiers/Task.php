@@ -1,15 +1,15 @@
 <?php
 
 class Task{
-    private string $id;
-    private string $name;
-    private bool $isCompleted;
-    private string $idTaskList;
+    private $id;
+    private $name;
+    private $status;
+    private $idTaskList;
 
-    public function __construct($id, $name, $isCompleted, $idTaskList){
+    public function __construct($id, $name, $status, $idTaskList){
         $this->id=$id;
         $this->name=$name;
-        $this->isCompleted=$isCompleted;
+        $this->status=$status;
         $this->idTaskList=$idTaskList;
     }
 
@@ -19,6 +19,14 @@ class Task{
 
     public function getIdTaskList(){
         return $this->idTaskList;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function getStatus(){
+        return $this->status;
     }
 }
 

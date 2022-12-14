@@ -82,12 +82,26 @@
 
         public static function getDataTask($idList){
             global $dsn, $usr, $mdp;
+            $results = array();
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
             $data = $gateway->getTaskFromList($idList);
 
-            return $data;
+            foreach($data as $row){
+                array_push($results, new Task($row['id'], $row['name'], $row['status'], $row['idTasksList']));
+            }
+            return $results;
+        }
+        
+        public static function checkTask($id){
+            global $dsn, $usr, $mdp;
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new TaskGateway($con);
+            $gateway->checkTaskBdd($id);
+
+            $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
         
         public static function deconnection(){

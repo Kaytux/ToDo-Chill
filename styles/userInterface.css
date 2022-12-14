@@ -72,3 +72,9 @@
 .list-adding-form-container{
     background-color: var(--color-background-secondary);
 }
+
+.task-name-container{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
