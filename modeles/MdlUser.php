@@ -18,8 +18,8 @@
                 $_SESSION['login'] = $mail;
                 $_SESSION['role'] = 'admin';
                 $_SESSION['list'] = MdlUser::getData($mail);
-                var_dump($_SESSION['list'][0]);
                 $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
+                $_SESSION['targetedList'] = $_SESSION['list'][0]->getId();
                 return true;
             }else{
                 $dVue['credentials'] = "mot de passe incorect";
@@ -45,9 +45,19 @@
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
-            $list = new TaskList($task, $_SESSION['login']);
+            $list = new TaskList("null", $task, $_SESSION['login']);
             $gateway->createNewListBdd($list);
             $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
+        }
+
+        public static function addATask($name){
+            global $dsn, $usr, $mdp;
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new TaskGateway($con);
+            $task = new Task("null", $name, false, $_SESSION['targetedList']);
+            $gateway->addTaskBdd($task);
+            $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
 
         public static function createNewAccount($login, $email, &$dVue){

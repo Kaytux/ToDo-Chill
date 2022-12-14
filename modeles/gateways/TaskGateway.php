@@ -19,5 +19,15 @@ class TaskGateway{
         $this->con->executeQuery($query, array(':id'=>array($id, PDO::PARAM_INT)));
         return $this->con->getResults();
     }
+
+    public function addTaskBdd($task){
+        $query='INSERT INTO Task (name, idTasksList) VALUES (:name, :idTasksList)';
+
+        $this->con->executeQuery($query, array(
+            ':name'=>array($task->getName(), PDO::PARAM_STR),
+            ':idTasksList'=>array($task->getIdTaskList(), PDO::PARAM_STR)
+        ));
+        return;
+    }
 }
 ?>

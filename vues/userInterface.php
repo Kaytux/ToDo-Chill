@@ -15,36 +15,48 @@
 		<input class="btn" type="submit" value="Se deconnecter"/>	
 		<input type="hidden" name="action" value="disconnectFromUser"/>
 	</form>
-	<div class="list-container">
-		<div class="list-name-container">
-			<?php
-				if(isset($_SESSION['list']) && count($_SESSION['list']) > 0){
-					foreach($_SESSION['list'] as $row){
-						$id = $row->getId();
-						echo "<form method='post' class='list-form-container'>
+
+	<div class="page-container">
+		<div class="list-container">
+			<div class="list-name-container">
+				<?php
+					if(isset($_SESSION['list']) && count($_SESSION['list']) > 0){
+						foreach($_SESSION['list'] as $row){
+							$id = $row->getId();
+							echo "<form method='post' class='list-form-container'>
 								<input class='list-text-container' type='submit' value='$row' name='listTargeted'>
 								<input type='hidden' name='id' value='$id'>
 								<input type='hidden' name='action' value='targetAList'>
 							</form>";
+						}
+					}
+				?>
+			</div>
+			<div class="list-adding-form-container">
+				<form method="post" class="list-add-container">
+					<input class="form-entry" type="text" placeholder="Nom de la liste" name="name">
+					<input class="btn-add" type="submit" value="+"/>	
+					<input type="hidden" name="action" value="addAList"/>
+				</form>
+			</div>
+		</div>
+		<div class="task-container">
+			<?php
+				if(isset($_SESSION['task']) && count($_SESSION['task']) > 0){
+					foreach($_SESSION['task'] as $row){
+						$disp = $row['name'];
+						echo "<p>$disp</p>";
 					}
 				}
 			?>
+			<div class="task-adding-form-container">
+				<form method="post" class="task-add-container">
+					<input class="form-entry" type="text" placeholder="Nom de la tâche" name="name">
+					<input class="btn-add" type="submit" value="+"/>	
+					<input type="hidden" name="action" value="addATask"/>
+				</form>
+			</div>
 		</div>
-		<form method="post" class="list-add-container">
-			<input class="form-entry" type="text" placeholder="Nom de la liste" name="name">
-			<input class="btn-add" type="submit" value="+"/>	
-			<input type="hidden" name="action" value="addAList"/>
-		</form>
 	</div>
-	<div class="task-container">
-		<?php
-			if(isset($_SESSION['task']) && count($_SESSION['task']) > 0){
-				foreach($_SESSION['task'] as $row){
-					$disp = $row['name'];
-					echo "<p>$disp</p>";
-				}
-			}
-		?>
-	</div>
-</body>
+	</body>
 </html>

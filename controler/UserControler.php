@@ -37,6 +37,9 @@ class UserControler{
                 case "targetAList":
                     $this->changeTargetedList();
                     break;
+                case "addATask":
+                    $this->addATask();
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -82,6 +85,13 @@ class UserControler{
     function changeTargetedList(){
         global $rep, $vues;
         $_SESSION['task'] = MdlUser::getDataTask($_POST['id']);
+        $_SESSION['targetedList'] = $_POST['id'];
+        require($rep.$vues['userInterface']);
+    }
+
+    function addATask(){
+        global $rep, $vues;
+        MdlUser::addATask($_POST['name']);
         require($rep.$vues['userInterface']);
     }
 } // fin classe
