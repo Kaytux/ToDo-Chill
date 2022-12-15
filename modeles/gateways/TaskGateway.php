@@ -39,5 +39,14 @@ class TaskGateway{
         ));
         return;
     }
+
+    public function deleteTaskBdd($id){
+        $query='DELETE FROM Task WHERE id=:id';
+
+        $this->con->executeQuery($query, array(
+            ':id'=>array($id, PDO::PARAM_STR)
+        ));
+        return;
+    }
 }
 ?>

@@ -104,6 +104,16 @@
             $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
 
+        public static function deleteTask($id){
+            global $dsn, $usr, $mdp;
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new TaskGateway($con);
+            $gateway->deleteTaskBdd($id);
+
+            $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
+        }
+
         public static function deconnection(){
             session_unset();
             session_destroy();

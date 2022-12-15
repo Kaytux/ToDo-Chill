@@ -46,6 +46,9 @@ class UserControler{
                 case "uncheckTask":
                     $this->changeStatus("0");
                     break;
+                case "deleteTask":
+                    $this->deleteTask();
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -104,6 +107,12 @@ class UserControler{
     function changeStatus($status){
         global $rep, $vues;
         MdlUser::changeStatus($_POST['id'], $status);
+        require($rep.$vues['userInterface']);
+    }
+
+    function deleteTask(){
+        global $rep, $vues;
+        MdlUser::deleteTask($_POST['id']);
         require($rep.$vues['userInterface']);
     }
 } // fin classe

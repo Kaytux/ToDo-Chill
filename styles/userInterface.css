@@ -76,5 +76,35 @@
 .task-name-container{
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 1rem;
+}
+
+.task-delete-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete {
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(250, 160, 160);
+    width: 50px;
+    height: 40px;
+    border-radius: 10%;
+    transition: 0.5s;
+}
+
+.delete:hover{
+    border-radius: 30%;
 }

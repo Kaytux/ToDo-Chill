@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/form.css">
 	<link rel="stylesheet" href="styles/userInterface.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>	
 	<form method="post" class="btn-right-corner">
@@ -49,7 +50,8 @@
 						$name = $row->getName();
 						$id = $row->getId();
 			?>
-				<form class="task-name-container" method="post">
+			<div class="task-name-container">
+				<form class="task-form-container" method="post">
 					<?php
 						if($row->getStatus()==0){
 					?>
@@ -57,23 +59,36 @@
 					<input type="hidden" name="action" value="checkTask">
 					<input type="hidden" name="id" value=<?=$id?>> 
 					<h2><?=$name?></h2>
-					<?php
-						}
-					?>
-					<?php
-						if($row->getStatus()==1){
-					?>
+				</form>
+				<form class="task-delete-container" method="post">
+					<input class="delete material-symbols-outlined" type="submit" value="delete">
+					<input type="hidden" name="action" value="deleteTask">
+					<input type="hidden" name="id" value=<?=$id?>> 
+				</form>
+				<?php
+					}
+				?>
+				<?php
+					if($row->getStatus()==1){
+				?>
+				<form class="task-name-container" method="post">
 					<input type="checkbox" onChange="submit()" checked>
 					<input type="hidden" name="action" value="uncheckTask">
 					<input type="hidden" name="id" value=<?=$id?>> 
 					<h2 style="text-decoration:line-through;"><?=$name?></h2>
-					<?php
-						}
-					?>
 				</form>
-			<?php
+				<form class="task-delete-container" method="post">
+					<input class="delete material-symbols-outlined" type="submit" value="delete">
+					<input type="hidden" name="action" value="deleteTask">
+					<input type="hidden" name="id" value=<?=$id?>> 
+				</form>
+				<?php
 					}
+				?>
+			</div>
+			<?php
 				}
+			}
 			?>
 			<div class="task-adding-form-container">
 				<form method="post" class="task-add-container">
