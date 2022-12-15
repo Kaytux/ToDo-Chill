@@ -18,9 +18,7 @@ class UserControler{
                 case NULL:
                     $this->Reinit();
                     break;        
-                case "connect":
-                    $this->connection();
-                    break;
+                
                 case "SignIn":
                     require($rep.$vues['signIn']);
                     break;
@@ -67,17 +65,6 @@ class UserControler{
         require($rep.$vues['homePage']);
     }
     
-    function connection(){
-        global $rep, $vues;
-        if(MdlAdmin::connection($_POST['email'], $_POST['password'], $dVueError)){
-            require($rep.$vues['adminPage']);
-        }elseif(MdlUser::connection($_POST['email'], $_POST['password'], $dVueError)){
-            require($rep.$vues['userInterface']);
-        }else{
-            require($rep.$vues['homePage']);
-        }
-    }
-
     function createNewAccount(){
         global $rep, $vues;
         if(MdlUser::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){

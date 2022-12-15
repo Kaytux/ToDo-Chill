@@ -1,5 +1,6 @@
 <?php
     class MdlUser{
+
         public static function connection($login, $password, &$dVue){
             global $dsn, $usr, $mdp;
 
@@ -8,23 +9,30 @@
 
             if(!Validation::valideForm($mail, $password, $dVue)){return false;}
 
-            $con = new Connection($dsn, $usr, $mdp);
-            $gateway = new UserGateway($con);
-            if(!$hash = $gateway->getCredentials($mail)){
-                return false;
-            }
-                
-            if(password_verify($password, $hash['mdp'])){
-                $_SESSION['login'] = $mail;
-                $_SESSION['role'] = 'admin';
-                $_SESSION['list'] = MdlUser::getData($mail);
-                $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
-                $_SESSION['targetedList'] = $_SESSION['list'][0]->getId();
-                return true;
+                $con = new Connection($dsn, $usr, $mdp);
+                $gateway = new UserGateway($con);
+                if(!$hash = $gateway->getCredentials($mail)){
+                    return false;
+                }
+
+                if(password_verify($password, $hash['mdp'])){
+                    $_SESSION['login'] = $mail;
+                    $_SESSION['role'] = 'user';
+                    $_SESSION['list'] = MdlUser::getData($mail);
+                    $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
+                    $_SESSION['targetedList'] = $_SESSION['list'][0]->getId();
+                    return true;
             }else{
                 $dVue['credentials'] = "mot de passe incorect";
                 return false;
             }
+        }
+        
+        public static function isUser(): ?User{
+            if(isset($_SESSION['login']) && isset($_SESSION['role']) && $_SESSION['role'] == "user"){
+                return new User($_SESSION['login']);
+            }
+            return null;
         }
 
         public static function getData($mail){

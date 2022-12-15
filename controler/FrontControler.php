@@ -14,6 +14,8 @@ class FrontControler{
 
         try{
             $admin = MdlAdmin::isAdmin();
+            $user = MdlUser::isUser();
+
             if(isset($_REQUEST['action'])){
                 $action=$_REQUEST['action'];
             }else{
@@ -27,7 +29,11 @@ class FrontControler{
                     new AdminControler();
                 }
             }else{
-                new UserControler();
+                if($user != null){
+                    new UserControler();
+                }else{
+                    new VisitorControler();
+                }
             }
             
 
