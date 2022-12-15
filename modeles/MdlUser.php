@@ -114,6 +114,22 @@
             $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
 
+        public static function deleteList($id, &$dVue){
+            global $dsn, $usr, $mdp;
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new TaskGateway($con);
+            $nbTask = $gateway->getNbTask($id);
+
+            if($nbTask[0]["count(*)"] != 0){
+                $dVue['error'] = "Vous ne pouvez pas supprimer une liste non vide";
+                return;
+            }
+
+            $gateway->deleteListBdd($id);
+            $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
+        }
+
         public static function deconnection(){
             session_unset();
             session_destroy();

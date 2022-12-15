@@ -49,6 +49,9 @@ class UserControler{
                 case "deleteTask":
                     $this->deleteTask();
                     break;
+                case "deleteList":
+                    $this->deleteList();
+                    break;
                 default:
                     echo "erreur page inconnue";
                     break;
@@ -113,6 +116,12 @@ class UserControler{
     function deleteTask(){
         global $rep, $vues;
         MdlUser::deleteTask($_POST['id']);
+        require($rep.$vues['userInterface']);
+    }
+
+    function deleteList(){
+        global $rep, $vues;
+        MdlUser::deleteList($_POST['id'], $dVueError);
         require($rep.$vues['userInterface']);
     }
 } // fin classe

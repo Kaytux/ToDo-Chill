@@ -17,6 +17,15 @@
 		<input type="hidden" name="action" value="disconnectFromUser"/>
 	</form>
 
+	<?php
+		if(isset($dVueError) && count($dVueError)>0){
+			foreach($dVueError as $row){?>
+			<h1><?=$row?></h!>
+	<?php
+			}
+		}
+	?>
+
 	<div class="page-container">
 		<div class="list-container">
 			<div class="list-name-container">
@@ -25,11 +34,18 @@
 						foreach($_SESSION['list'] as $row){
 							$id = $row->getId();
 				?>
+					<div class="list-focus">
 					<form method='post' class='list-form-container'>
 						<input class='list-text-container' type='submit' value=<?=$row?> name='listTargeted'>
 						<input type='hidden' name='id' value=<?=$id?>>
 						<input type='hidden' name='action' value='targetAList'>
 					</form>
+					<form class="list-delete-container" method="post">
+						<input class="delete material-symbols-outlined" type="submit" value="delete">
+						<input type="hidden" name="action" value="deleteList">
+						<input type="hidden" name="id" value=<?=$id?>> 
+					</form>
+					</div>
 				<?php
 						}
 					}

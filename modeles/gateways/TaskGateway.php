@@ -48,5 +48,23 @@ class TaskGateway{
         ));
         return;
     }
+
+    public function getNbTask($id){
+        $query='SELECT count(*) FROM Task WHERE idTasksList=:id';
+
+        $this->con->executeQuery($query, array(
+            ':id'=>array($id, PDO::PARAM_STR)
+        ));
+        return $this->con->getResults();
+    }
+
+    public function deleteListBdd($id){
+        $query='DELETE FROM TasksList WHERE id=:id';
+
+        $this->con->executeQuery($query, array(
+            ':id'=>array($id, PDO::PARAM_STR)
+        ));
+        return;
+    }
 }
 ?>

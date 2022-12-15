@@ -108,3 +108,14 @@
 .delete:hover{
     border-radius: 30%;
 }
+
+.list-focus{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.list-delete-container{
+    position: sticky;
+    left : 20rem;
+}
