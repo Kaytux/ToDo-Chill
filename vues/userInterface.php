@@ -33,8 +33,12 @@
 					if(isset($_SESSION['list']) && count($_SESSION['list']) > 0){
 						foreach($_SESSION['list'] as $row){
 							$id = $row->getId();
-				?>
-					<div class="list-focus">
+							if($row->getId() == $_SESSION['targetedList']){
+								echo '<div class="list-focus-targeted">';
+							}else{
+								echo'<div class="list-focus">';
+							}
+					?>
 					<form method='post' class='list-form-container'>
 						<input class='list-text-container' type='submit' value=<?=$row?> name='listTargeted'>
 						<input type='hidden' name='id' value=<?=$id?>>

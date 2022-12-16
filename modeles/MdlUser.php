@@ -58,6 +58,12 @@
             $list = new TaskList("null", $task, $_SESSION['login']);
             $gateway->createNewListBdd($list);
             $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
+            foreach($_SESSION['list'] as $row){
+                if($row->getName() == $list->getName()){
+                    $_SESSION['targetedList'] = $row->getId();
+                    $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
+                }
+            }
         }
 
         public static function addATask($name){

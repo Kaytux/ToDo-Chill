@@ -115,6 +115,14 @@
     align-items: center;
 }
 
+.list-focus-targeted{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--color-background-secondary);
+    border-radius: 5px;
+}
+
 .list-delete-container{
     position: sticky;
     left : 20rem;
