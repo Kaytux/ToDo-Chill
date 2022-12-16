@@ -2,7 +2,23 @@
 
 class Validation{
     
-    static function valideForm(&$email, &$password, &$dataVueError):bool{
+    static function valideForm($request, $variable, &$dataVueError):bool{
+        if(is_string($variable)){
+            if(!isset($request[$variable])){
+                $dataVueError[$variable] = "Veuillez renseigner un ".$variable;
+                return false;
+            }else{
+                return true;
+            }
+        }
+        foreach($variable as $row){
+            if(!isset($request[$row]) || $request[$row] == ""){
+                $dataVueError[$row] = "Veuillez renseigner un ".$row;
+                return false;
+            }
+        }
+        return true;
+        /*
         if(!isset($email) || $email==""){
             $dataVueError['email'] = "veuillez renseigner un email";
             return false;
@@ -14,6 +30,7 @@ class Validation{
         }
         
         return true;
+        */
     }
 
     static function clean($string){

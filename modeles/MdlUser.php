@@ -1,13 +1,8 @@
 <?php
     class MdlUser{
 
-        public static function connection($login, $password, &$dVue){
+        public static function connection($mail, $password, &$dVue){
             global $dsn, $usr, $mdp;
-
-            $mail = Validation::clean($login);
-            $password = Validation::clean($password);
-
-            if(!Validation::valideForm($mail, $password, $dVue)){return false;}
 
                 $con = new Connection($dsn, $usr, $mdp);
                 $gateway = new UserGateway($con);

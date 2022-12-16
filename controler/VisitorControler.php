@@ -71,9 +71,19 @@ class VisitorControler{
     
     function connection(){
         global $rep, $vues;
-        if(MdlAdmin::connection($_POST['email'], $_POST['password'], $dVueError)){
+        
+        $mail = Validation::clean($_POST['email']);
+        $password = Validation::clean($_POST['password']);
+        $variable = ["email", "password"];
+
+        if(!Validation::valideForm($_REQUEST, $variable, $dVueError)){
+            require($rep.$vues['homePage']);
+            exit;
+        }
+
+        if(MdlAdmin::connection($mail, $password, $dVueError)){
             require($rep.$vues['adminPage']);
-        }elseif(MdlUser::connection($_POST['email'], $_POST['password'], $dVueError)){
+        }elseif(MdlUser::connection($mail, $password, $dVueError)){
             require($rep.$vues['userInterface']);
         }else{
             require($rep.$vues['homePage']);
