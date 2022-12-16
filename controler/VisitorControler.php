@@ -3,6 +3,7 @@
 class VisitorControler{
 
     function __construct() {
+        global $rep, $vues;
         $dVueError = array();
 
         try{
@@ -18,6 +19,15 @@ class VisitorControler{
                     break;
                 case "connect":
                     $this->connection();
+                    break;
+                case "SignIn":
+                    require($rep.$vues['signIn']);
+                    break;
+                case "createNewAccount":
+                    $this->createNewAccount();
+                    break;
+                case "continueAsAnonymous":
+                    $this->continueAsAnonymous();
                     break;
                 default:
                     echo "erreur page inconnue";
@@ -42,6 +52,21 @@ class VisitorControler{
         }else{
             require($rep.$vues['homePage']);
         }
+    }
+    
+    function createNewAccount(){
+        global $rep, $vues;
+        if(MdlUser::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
+            require($rep.$vues['homePage']);
+        }else{
+            require($rep.$vues['signIn']);
+        }
+    }
+
+    function continueAsAnonymous(){
+        global $rep, $vues;
+        MdlVisitor::connection();
+        require($rep.$vues['userInterface']);
     }
 }
 

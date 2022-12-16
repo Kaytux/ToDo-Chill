@@ -19,8 +19,10 @@
                     $_SESSION['login'] = $mail;
                     $_SESSION['role'] = 'user';
                     $_SESSION['list'] = MdlUser::getData($mail);
-                    $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
-                    $_SESSION['targetedList'] = $_SESSION['list'][0]->getId();
+                    if(count($_SESSION['list'])!=0){
+                        $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
+                        $_SESSION['targetedList'] = $_SESSION['list'][0]->getId();
+                    }
                     return true;
             }else{
                 $dVue['credentials'] = "mot de passe incorect";

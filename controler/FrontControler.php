@@ -9,9 +9,6 @@ class FrontControler{
 
         $listeAction_admin=array("disconnectFromAdmin","createTableBdd","createUser","deleteAllDataBdd","deleteAllTableBdd");
 
-        // MdlAdmin::connection('admin', 'admin');
-        // MdlAdmin::deconnection();
-
         try{
             $admin = MdlAdmin::isAdmin();
             $user = MdlUser::isUser();

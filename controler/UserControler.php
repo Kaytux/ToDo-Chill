@@ -16,15 +16,9 @@ class UserControler{
             }        
             switch($action){
                 case NULL:
+                    MdlUser::deconnection();
                     $this->Reinit();
                     break;        
-                
-                case "SignIn":
-                    require($rep.$vues['signIn']);
-                    break;
-                case "createNewAccount":
-                    $this->createNewAccount();
-                    break;
                 case "disconnectFromUser":
                     MdlUser::deconnection();
                     require($rep.$vues['homePage']);
@@ -65,15 +59,6 @@ class UserControler{
         require($rep.$vues['homePage']);
     }
     
-    function createNewAccount(){
-        global $rep, $vues;
-        if(MdlUser::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
-            require($rep.$vues['homePage']);
-        }else{
-            require($rep.$vues['signIn']);
-        }
-    }
-
     function addAList(){
         global $rep, $vues;
         $name = $_POST['name'];
