@@ -101,6 +101,7 @@
 					<input class="delete material-symbols-outlined" type="submit" value="delete">
 					<input type="hidden" name="action" value="deleteTask">
 					<input type="hidden" name="id" value=<?=$id?>> 
+					<input type="hidden" name="idList" value=<?=$dataVue['targetedList']?>>
 				</form>
 				<?php
 					}
@@ -113,6 +114,9 @@
 			<div class="task-adding-form-container">
 				<form method="post" class="task-add-container">
 					<input class="form-entry" type="text" placeholder="Nom de la tâche" name="name">
+					<?php if($dataVue['targetedList']!=null){?>
+						<input type="hidden" name="id" value=<?=$dataVue['targetedList']?>>
+					<?php } ?>
 					<input class="btn-add" type="submit" value="+"/>	
 					<input type="hidden" name="action" value="addATask"/>
 				</form>

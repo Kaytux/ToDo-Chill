@@ -56,14 +56,13 @@
             }
         }
 
-        public static function addATask($name){
+        public static function addATask($name, $id){
             global $dsn, $usr, $mdp;
 
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
-            $task = new Task("null", $name, false, $_SESSION['targetedList']);
+            $task = new Task("null", $name, false, $id);
             $gateway->addTaskBdd($task);
-            $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
 
         public static function createNewAccount($login, $email, &$dVue){
@@ -114,8 +113,6 @@
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
             $gateway->deleteTaskBdd($id);
-
-            $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
 
         public static function deleteList($id, &$dVue){

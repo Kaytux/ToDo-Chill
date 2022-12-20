@@ -2,7 +2,7 @@
 
 class Validation{
     
-    static function valideForm($request, $variable, &$dataVueError):bool{
+    static function valideData($request, $variable, &$dataVueError):bool{
         if(is_string($variable)){
             if(!isset($request[$variable])){
                 $dataVueError[$variable] = "Veuillez renseigner un ".$variable;

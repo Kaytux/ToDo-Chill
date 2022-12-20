@@ -63,7 +63,7 @@ class UserControler{
         global $rep, $vues;
         $name = $_POST['name'];
         MdlUser::addAListToUser($name);
-        require($rep.$vues['userInterface']);
+        $this->display('userInterface',null);
     }
 
     function changeTargetedList(){
@@ -72,9 +72,9 @@ class UserControler{
     }
 
     function addATask(){
-        global $rep, $vues;
-        MdlUser::addATask($_POST['name']);
-        require($rep.$vues['userInterface']);
+        global $rep, $vuesData;
+        MdlUser::addATask($_POST['name'], $_POST['id']);
+        $this->display('userInterface', $_POST['id']);
     }
 
     function changeStatus($status){
@@ -85,17 +85,22 @@ class UserControler{
 
     function deleteTask(){
         global $rep, $vues;
-        MdlUser::deleteTask($_POST['id']);
-        require($rep.$vues['userInterface']);
+        if(!Validation::ValideData($_REQUEST, 'id', $dVueError)){
+            this->display('ErrorVue');
+        }
+        $id = Validation::clean($_POST['id']);
+        $listId =  MdlUser::getActualListFromTaskId($id);
+        MdlUser::deleteTask($id);
+        $this->display('userInterface', $listId);
     }
 
     function deleteList(){
         global $rep, $vues;
         MdlUser::deleteList($_POST['id'], $dVueError);
-        require($rep.$vues['userInterface']);
+        $this->display('userInterface',null);
     }
 
-    function display($page, $actualList){
+    function display($page, ?string $actualList){
         global $rep, $vues;
         $dataVue = [];
 

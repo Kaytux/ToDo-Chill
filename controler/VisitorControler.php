@@ -76,7 +76,7 @@ class VisitorControler{
         $password = Validation::clean($_POST['password']);
         $variable = ["email", "password"];
 
-        if(!Validation::valideForm($_REQUEST, $variable, $dVueError)){
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
             require($rep.$vues['homePage']);
             exit;
         }
@@ -148,8 +148,8 @@ class VisitorControler{
         $dataVue = [];
 
         $dataVue['list'] = MdlUser::getData($_SESSION['login']);
-        $dataVue['task'] = MdlUser::getDataTask($dataVue['list'][0]->getId());
-        $dataVue['targetedList'] = $dataVue['list'][0]->getId();
+        count($dataVue['list'])==0 ? $dataVue['task'] = null : $dataVue['task'] = MdlUser::getDataTask($dataVue['list'][0]->getId());
+        count($dataVue['list'])==0 ? $dataVue['targetedList'] = null : $dataVue['targetedList'] = $dataVue['list'][0]->getId();
 
         require($rep.$vues[$page]);
     }
