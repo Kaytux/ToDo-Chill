@@ -30,10 +30,10 @@
 		<div class="list-container">
 			<div class="list-name-container">
 				<?php
-					if(isset($_SESSION['list']) && count($_SESSION['list']) > 0){
-						foreach($_SESSION['list'] as $row){
+					if(isset($dataVue['list']) && count($dataVue['list']) > 0){
+						foreach($dataVue['list'] as $row){
 							$id = $row->getId();
-							if($row->getId() == $_SESSION['targetedList']){
+							if($row->getId() == $dataVue['targetedList']){
 								echo '<div class="list-focus-targeted">';
 							}else{
 								echo'<div class="list-focus">';
@@ -65,8 +65,8 @@
 		</div>
 		<div class="task-container">
 			<?php
-				if(isset($_SESSION['task']) && count($_SESSION['task']) > 0){
-					foreach($_SESSION['task'] as $row){
+				if(isset($dataVue['task']) && count($dataVue['task']) > 0){
+					foreach($dataVue['task'] as $row){
 						$name = $row->getName();
 						$id = $row->getId();
 			?>

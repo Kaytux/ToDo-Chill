@@ -13,11 +13,6 @@
                 if(password_verify($password, $hash['mdp'])){
                     $_SESSION['login'] = $mail;
                     $_SESSION['role'] = 'user';
-                    $_SESSION['list'] = MdlUser::getData($mail);
-                    if(count($_SESSION['list'])!=0){
-                        $_SESSION['task'] = MdlUser::getDataTask($_SESSION['list'][0]->getId());
-                        $_SESSION['targetedList'] = $_SESSION['list'][0]->getId();
-                    }
                     return true;
             }else{
                 $dVue['credentials'] = "mot de passe incorect";
@@ -111,8 +106,6 @@
             $con = new Connection($dsn, $usr, $mdp);
             $gateway = new TaskGateway($con);
             $gateway->changeTaskStatus($id, $status);
-
-            $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
         }
 
         public static function deleteTask($id){
@@ -139,6 +132,16 @@
 
             $gateway->deleteListBdd($id);
             $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
+        }
+
+        public static function getActualListFromTaskId($id){
+            global $dsn, $usr, $mdp ;
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new UserGateway($con);
+            $results = $gateway->getListFromTask($id);
+            
+            return $results[0]['idTasksList'];
         }
 
         public static function deconnection(){

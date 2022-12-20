@@ -68,9 +68,7 @@ class UserControler{
 
     function changeTargetedList(){
         global $rep, $vues;
-        $_SESSION['task'] = MdlUser::getDataTask($_POST['id']);
-        $_SESSION['targetedList'] = $_POST['id'];
-        require($rep.$vues['userInterface']);
+        $this->display('userInterface', $_POST['id']);
     }
 
     function addATask(){
@@ -82,7 +80,7 @@ class UserControler{
     function changeStatus($status){
         global $rep, $vues;
         MdlUser::changeStatus($_POST['id'], $status);
-        require($rep.$vues['userInterface']);
+        $this->display('userInterface', MdlUser::getActualListFromTaskId($_POST['id']));
     }
 
     function deleteTask(){
@@ -95,6 +93,17 @@ class UserControler{
         global $rep, $vues;
         MdlUser::deleteList($_POST['id'], $dVueError);
         require($rep.$vues['userInterface']);
+    }
+
+    function display($page, $actualList){
+        global $rep, $vues;
+        $dataVue = [];
+
+        $dataVue['list'] = MdlUser::getData($_SESSION['login']);
+        $dataVue['task'] = MdlUser::getDataTask($actualList);
+        $dataVue['targetedList'] = $actualList;
+
+        require($rep.$vues[$page]);
     }
 } // fin classe
 

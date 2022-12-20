@@ -84,7 +84,7 @@ class VisitorControler{
         if(MdlAdmin::connection($mail, $password, $dVueError)){
             require($rep.$vues['adminPage']);
         }elseif(MdlUser::connection($mail, $password, $dVueError)){
-            require($rep.$vues['userInterface']);
+            $this->display('userInterface');
         }else{
             require($rep.$vues['homePage']);
         }
@@ -141,6 +141,17 @@ class VisitorControler{
         global $rep, $vues;
         MdlUser::deleteList($_POST['id'], $dVueError);
         require($rep.$vues['userInterface']);
+    }
+    
+    function display($page){
+        global $rep, $vues;
+        $dataVue = [];
+
+        $dataVue['list'] = MdlUser::getData($_SESSION['login']);
+        $dataVue['task'] = MdlUser::getDataTask($dataVue['list'][0]->getId());
+        $dataVue['targetedList'] = $dataVue['list'][0]->getId();
+
+        require($rep.$vues[$page]);
     }
 }
 

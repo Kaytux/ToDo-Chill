@@ -39,5 +39,14 @@ class UserGateway{
             throw newException();
         }
     }
+    
+    public function getListFromTask($id){
+        $query = 'SELECT idTasksList FROM Task WHERE id=:id';
+        
+        $this->con->executeQuery($query, array(
+            ':id'=>array($id, PDO::PARAM_INT)
+        ));
+        return $this->con->getResults();
+    }
 }
 ?>
