@@ -19,6 +19,8 @@
 
 .task-add-container{
     position: absolute;
+    display: flex;
+    flex-direction: row;
     bottom: 1rem;
 }
 
@@ -126,4 +128,11 @@
 .list-delete-container{
     position: sticky;
     left : 20rem;
+}
+
+.userInterface-header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 1rem;
 }

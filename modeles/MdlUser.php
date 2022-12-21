@@ -47,13 +47,6 @@
             $gateway = new TaskGateway($con);
             $list = new TaskList("null", $task, $_SESSION['login']);
             $gateway->createNewListBdd($list);
-            $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
-            foreach($_SESSION['list'] as $row){
-                if($row->getName() == $list->getName()){
-                    $_SESSION['targetedList'] = $row->getId();
-                    $_SESSION['task'] = MdlUser::getDataTask($_SESSION['targetedList']);
-                }
-            }
         }
 
         public static function addATask($name, $id){
@@ -123,12 +116,11 @@
             $nbTask = $gateway->getNbTask($id);
 
             if($nbTask[0]["count(*)"] != 0){
-                $dVue['error'] = "Vous ne pouvez pas supprimer une liste non vide";
+                $dVue['nonEmptyList'] = "Vous ne pouvez pas supprimer une liste non vide";
                 return;
             }
 
             $gateway->deleteListBdd($id);
-            $_SESSION['list'] = MdlUser::getData($_SESSION['login']);
         }
 
         public static function getActualListFromTaskId($id){

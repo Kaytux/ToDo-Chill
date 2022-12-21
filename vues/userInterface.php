@@ -12,19 +12,20 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>	
+
+	<div class="userInterface-header-container">
+	<?php
+		if(isset($dVueError['nonEmptyList']) && count($dVueError)>0){?>
+			<p class="error-container"><?=$dVueError['nonEmptyList']?></p>
+	<?php }else{ ?>
+		<p style='color: transparent'>placeholder</p>
+	<?php } ?>
+
 	<form method="post" class="btn-right-corner">
 		<input class="btn" type="submit" value="Se deconnecter"/>	
 		<input type="hidden" name="action" value="disconnectFromUser"/>
 	</form>
-
-	<?php
-		if(isset($dVueError) && count($dVueError)>0){
-			foreach($dVueError as $row){?>
-			<h1><?=$row?></h!>
-	<?php
-			}
-		}
-	?>
+	</div>
 
 	<div class="page-container">
 		<div class="list-container">
@@ -111,8 +112,8 @@
 				}
 			}
 			?>
-			<div class="task-adding-form-container">
-				<form method="post" class="task-add-container">
+			<div class="task-add-container">
+				<form method="post">
 					<input class="form-entry" type="text" placeholder="Nom de la tâche" name="name">
 					<?php if($dataVue['targetedList']!=null){?>
 						<input type="hidden" name="id" value=<?=$dataVue['targetedList']?>>
@@ -120,8 +121,11 @@
 					<input class="btn-add" type="submit" value="+"/>	
 					<input type="hidden" name="action" value="addATask"/>
 				</form>
+				<?php
+					if(isset($dVueError['name']) && count($dVueError)>0){?>
+						<p class="error-container"><?=$dVueError['name']?></p>
+				<?php } ?>
 			</div>
-		</div>
 	</div>
 	</body>
 </html>

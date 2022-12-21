@@ -38,3 +38,10 @@ body{
   color: var(--color-background-primary);
   background: var(--color-primary);
 }
+
+.error-container{
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

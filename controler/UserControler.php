@@ -61,46 +61,70 @@ class UserControler{
     
     function addAList(){
         global $rep, $vues;
-        $name = $_POST['name'];
+        $variable = ["name"];
+        $name = Validation::clean($_POST['name']);
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+            $this->display('userInterface', null, $dVueError);
+            exit;
+        }
         MdlUser::addAListToUser($name);
-        $this->display('userInterface',null);
+        $this->display('userInterface',null, null);
     }
 
     function changeTargetedList(){
         global $rep, $vues;
-        $this->display('userInterface', $_POST['id']);
+        $id = Validation::clean($_POST['id']);
+        $variable = ["id"];
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+            $this->display('userInterface', null, $dVueError);
+            exit;
+        }
+        $this->display('userInterface', $_POST['id'], null);
     }
 
     function addATask(){
         global $rep, $vuesData;
-        MdlUser::addATask($_POST['name'], $_POST['id']);
-        $this->display('userInterface', $_POST['id']);
+        $variable = ["name", "id"];
+        $name = Validation::clean($_POST['name']);
+        $id = Validation::clean($_POST['id']);
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+            $this->display('userInterface', $id, $dVueError);
+            exit;
+        }
+        MdlUser::addATask($name, $id);
+        $this->display('userInterface', $id, null);
     }
 
     function changeStatus($status){
         global $rep, $vues;
-        MdlUser::changeStatus($_POST['id'], $status);
-        $this->display('userInterface', MdlUser::getActualListFromTaskId($_POST['id']));
+        $variable = ["id"];
+        $id = Validation::clean($_POST['id']);
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+            $this->display('userInterface', null, $dVueError);
+            exit;
+        }
+        MdlUser::changeStatus($id, $status);
+        $this->display('userInterface', MdlUser::getActualListFromTaskId($id), null);
     }
 
     function deleteTask(){
         global $rep, $vues;
-        if(!Validation::ValideData($_REQUEST, 'id', $dVueError)){
-            this->display('ErrorVue');
-        }
         $id = Validation::clean($_POST['id']);
         $listId =  MdlUser::getActualListFromTaskId($id);
+        if(!Validation::valideData($_REQUEST, 'id', $dVueError)){
+            this->display('ErrorVue', $_POST['id'], $dVueError);
+        }
         MdlUser::deleteTask($id);
-        $this->display('userInterface', $listId);
+        $this->display('userInterface', $listId, null);
     }
 
     function deleteList(){
         global $rep, $vues;
         MdlUser::deleteList($_POST['id'], $dVueError);
-        $this->display('userInterface',null);
+        $this->display('userInterface', $_POST['id'], $dVueError);
     }
 
-    function display($page, ?string $actualList){
+    function display($page, ?string $actualList, ?array $dVueError){
         global $rep, $vues;
         $dataVue = [];
 
