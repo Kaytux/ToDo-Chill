@@ -1,8 +1,8 @@
 <?php
 
-class VisitorControler{
+class VisitorControler extends ControllerMethods{
 
-    function __construct() {
+    function __construct(){
         global $rep, $vues;
         $dVueError = array();
 
@@ -64,11 +64,6 @@ class VisitorControler{
         }
     }
 
-    function Reinit(){
-        global $rep, $vues;
-        require($rep.$vues['homePage']);
-    }
-    
     function connection(){
         global $rep, $vues;
         
@@ -82,17 +77,27 @@ class VisitorControler{
         }
 
         if(MdlAdmin::connection($mail, $password, $dVueError)){
-            require($rep.$vues['adminPage']);
+            $this->display('adminPage', null, $dVueError);
         }elseif(MdlUser::connection($mail, $password, $dVueError)){
-            $this->display('userInterface');
+            $this->display('userInterface', null, $dVueError);
         }else{
-            require($rep.$vues['homePage']);
+            $this->display('homePage', null, $dVueError);
         }
     }
     
     function createNewAccount(){
         global $rep, $vues;
-        if(MdlUser::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
+
+        $mail = Validation::clean($_POST['email']);
+        $password = Validation::clean($_POST['password']);
+        $variable = ["email", "password"];
+
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+            require($rep.$vues['signIn']);
+            exit;
+        }
+
+        if(MdlVisitor::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
             require($rep.$vues['homePage']);
         }else{
             require($rep.$vues['signIn']);
@@ -102,9 +107,10 @@ class VisitorControler{
     function continueAsAnonymous(){
         global $rep, $vues;
         MdlVisitor::connection();
-        require($rep.$vues['userInterface']);
+        $this->display('userInterface', null, null);
     }
     
+    /*
     function addAList(){
         global $rep, $vues;
         $name = $_POST['name'];
@@ -153,6 +159,7 @@ class VisitorControler{
 
         require($rep.$vues[$page]);
     }
+    */
 }
 
 ?>

@@ -65,6 +65,9 @@
 			</div>
 		</div>
 		<div class="task-container">
+			<?php if(isset($dVueError['id'])) { ?>
+				<p class="error-container">Veuillez d'abord sélectionner une liste</p>
+			<?php } ?>
 			<?php
 				if(isset($dataVue['task']) && count($dataVue['task']) > 0){
 					foreach($dataVue['task'] as $row){
@@ -123,7 +126,7 @@
 				</form>
 				<?php
 					if(isset($dVueError['name']) && count($dVueError)>0){?>
-						<p class="error-container"><?=$dVueError['name']?></p>
+						<p class="error-container">Champs obligatoire : veuillez renseigner un nom</p>
 				<?php } ?>
 			</div>
 	</div>

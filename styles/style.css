@@ -40,7 +40,7 @@ body{
 }
 
 .error-container{
-  color: red;
+  color: #FFCCCB;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -22,6 +22,24 @@ class MdlVisitor{
         }
         return $results;
     }
+    
+    public static function createNewAccount($login, $email, &$dVue){
+            global $dsn, $usr, $mdp;
+
+            $mail = htmlspecialchars($login);
+            $pass = password_hash(htmlspecialchars($email),PASSWORD_DEFAULT);
+
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new UserGateway($con);
+            if($gateway->addUserBdd($mail, $pass)){
+                return true;
+            }else{
+                $dVue['error'] = 'impossible de se connecter à la bdd';
+                return false;
+            }
+        }
+
+
 }
 
 ?>
