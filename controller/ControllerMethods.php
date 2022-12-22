@@ -38,7 +38,10 @@ class ControllerMethods{
         global $rep, $vuesData;
         $variable = ["name", "id"];
         $name = Validation::clean($_POST['name']);
-        $id = Validation::clean($_POST['id']);
+        if(isset($_POST['id'])){
+            $id = Validation::clean($_POST['id']);
+        }
+
         if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
             $this->display('userInterface', null, $dVueError);
             exit;

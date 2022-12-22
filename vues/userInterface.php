@@ -73,9 +73,7 @@
 			</div>
 		</div>
 		<div class="task-container">
-			<?php if(isset($dVueError['id'])) { ?>
-				<p class="error-container">Veuillez d'abord sélectionner une liste</p>
-			<?php }
+			<?php
 				if(!isset($dataVue['targetedList'])){
 					echo "<h2 class='error-container'>Ajouter ou sélectionner une liste</h2>";
 				}?>
@@ -142,6 +140,9 @@
 				<?php if(isset($dVueError['nameLenght']) && count($dVueError)>0){?>
 						<p class="error-container"><?=$dVueError['nameLenght']?></p>
 				<?php } ?>
+				<?php if(isset($dVueError['id'])) { ?>
+					<p class="error-container">Veuillez d'abord sélectionner une liste</p>
+				<?php }?>
 			</div>
 	</div>
 	</body>
