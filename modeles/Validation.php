@@ -20,6 +20,14 @@ class Validation{
         return true;
     }
 
+    static function valideNewData($name, &$dataVueError):bool{
+        if(strlen($name)>40){
+            $dataVueError['nameLenght'] = "Nom trop long, maximum 40 caractères";
+            return false;
+        }
+        return true;
+    }
+
     static function clean($string){
         return htmlspecialchars($string);
     }

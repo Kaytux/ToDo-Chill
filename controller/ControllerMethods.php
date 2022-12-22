@@ -15,6 +15,10 @@ class ControllerMethods{
             $this->display('userInterface', null, $dVueError);
             exit;
         }
+        if(!Validation::valideNewData($name, $dVueError)){
+            $this->display('userInterface', null, $dVueError);
+            exit;
+        }
         MdlUser::addAListToUser($name);
         $this->display('userInterface',null, null);
     }
@@ -33,12 +37,16 @@ class ControllerMethods{
     function addATask(){
         global $rep, $vuesData;
         $variable = ["name", "id"];
+        $name = Validation::clean($_POST['name']);
+        $id = Validation::clean($_POST['id']);
         if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
             $this->display('userInterface', null, $dVueError);
             exit;
         }
-        $name = Validation::clean($_POST['name']);
-        $id = Validation::clean($_POST['id']);
+        if(!Validation::valideNewData($name, $dVueError)){
+            $this->display('userInterface', null, $dVueError);
+            exit;
+        }
         MdlUser::addATask($name, $id);
         $this->display('userInterface', $id, null);
     }
@@ -76,9 +84,11 @@ class ControllerMethods{
         global $rep, $vues;
         $dataVue = [];
 
-        $dataVue['list'] = MdlUser::getData($_SESSION['login']);
-        $dataVue['task'] = MdlUser::getDataTask($actualList);
-        $dataVue['targetedList'] = $actualList;
+        if(isset($_SESSION['login'])){
+            $dataVue['list'] = MdlUser::getData($_SESSION['login']);
+            $dataVue['task'] = MdlUser::getDataTask($actualList);
+            $dataVue['targetedList'] = $actualList;
+        }
 
         require($rep.$vues[$page]);
     }

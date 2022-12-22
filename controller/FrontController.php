@@ -8,7 +8,6 @@ class FrontController{
         session_start();
 
         $listeAction_admin=array("disconnectFromAdmin","createTableBdd","createUser","deleteAllDataBdd","deleteAllTableBdd");
-        $this->createBdd();
 
         try{
             $admin = MdlAdmin::isAdmin();

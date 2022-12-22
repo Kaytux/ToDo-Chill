@@ -40,6 +40,7 @@
 				<?php
 					if(isset($dataVue['list']) && count($dataVue['list']) > 0){
 						foreach($dataVue['list'] as $row){
+							$name = $row->getName();
 							$id = $row->getId();
 							if($row->getId() == $dataVue['targetedList']){
 								echo '<div class="list-focus-targeted">';
@@ -48,7 +49,7 @@
 							}
 					?>
 					<form method='post' class='list-form-container'>
-						<input class='list-text-container' type='submit' value=<?=$row?> name='listTargeted'>
+						<input class='list-text-container' type='submit' value=<?=$name?> name='listTargeted'>
 						<input type='hidden' name='id' value=<?=$id?>>
 						<input type='hidden' name='action' value='targetAList'>
 					</form>
@@ -60,7 +61,7 @@
 					</div>
 				<?php
 						}
-					}
+					}	
 				?>
 			</div>
 			<div class="list-adding-form-container">
@@ -74,7 +75,10 @@
 		<div class="task-container">
 			<?php if(isset($dVueError['id'])) { ?>
 				<p class="error-container">Veuillez d'abord sélectionner une liste</p>
-			<?php } ?>
+			<?php }
+				if(!isset($dataVue['targetedList'])){
+					echo "<h2 class='error-container'>Ajouter ou sélectionner une liste</h2>";
+				}?>
 			<?php
 				if(isset($dataVue['task']) && count($dataVue['task']) > 0){
 					foreach($dataVue['task'] as $row){
@@ -125,7 +129,7 @@
 			<div class="task-add-container">
 				<form method="post">
 					<input class="form-entry" type="text" placeholder="Nom de la tâche" name="name">
-					<?php if($dataVue['targetedList']!=null){?>
+					<?php if(isset($dataVue['targetedList']) && $dataVue['targetedList']!=null){?>
 						<input type="hidden" name="id" value=<?=$dataVue['targetedList']?>>
 					<?php } ?>
 					<input class="btn-add" type="submit" value="+"/>	
@@ -134,6 +138,9 @@
 				<?php
 					if(isset($dVueError['name']) && count($dVueError)>0){?>
 						<p class="error-container">Champs obligatoire : veuillez renseigner un nom</p>
+				<?php } ?>
+				<?php if(isset($dVueError['nameLenght']) && count($dVueError)>0){?>
+						<p class="error-container"><?=$dVueError['nameLenght']?></p>
 				<?php } ?>
 			</div>
 	</div>
