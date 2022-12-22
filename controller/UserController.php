@@ -1,6 +1,6 @@
 <?php
 
-class UserControler extends ControllerMethods{
+class UserController extends ControllerMethods{
     
     function __construct(){
         global $rep,$vues;

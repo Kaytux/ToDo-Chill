@@ -8,31 +8,52 @@ class AdminGateway{
     }
 
     function createTable(){
-        $query='CREATE TABLE IF NOT EXISTS Inscrit(
-            id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            mail varchar(40),
-            mdp varchar(40),
-            isAdmin boolean default false
-        );';
+        $query='CREATE TABLE Inscrit (
+        mail varchar(40) NOT NULL,
+        mdp varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+        isAdmin tinyint(1) DEFAULT 0
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-        $this->con->executeQueryWithoutParameters($query);
+        INSERT INTO Inscrit (mail, mdp, isAdmin) VALUES
+        ("admin", "$2y$10$kS0exZw6F2ZJkeBfXzti9OUh1QR.yePlOSxLo/9NRInX33q4z2ndi", 1),
+        
+        CREATE TABLE Task (
+        id int NOT NULL,
+        name varchar(40) DEFAULT NULL,
+        status int NOT NULL DEFAULT 0,
+        idTasksList int DEFAULT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-        $query='CREATE TABLE IF NOT EXISTS TasksList(
-            id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            idUser INT,
-            name varchar(40),
-            FOREIGN KEY (idUser) REFERENCES Inscrit(id)
-        );';
+        CREATE TABLE TasksList (
+        id int NOT NULL,
+        name varchar(40) DEFAULT NULL,
+        mailUser varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-        $this->con->executeQueryWithoutParameters($query);
+        ALTER TABLE Inscrit
+        ADD PRIMARY KEY (mail);
 
-        $query='CREATE TABLE IF NOT EXISTS Task(
-            id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-            name varchar(40),
-            status INT NOT NULL,
-            idTasksList INT,
-            FOREIGN KEY (idTasksList) REFERENCES TasksList(id)
-        );';
+        ALTER TABLE Task
+        ADD PRIMARY KEY (id),
+        ADD KEY idTasksList (idTasksList);
+
+        ALTER TABLE TasksList
+        ADD PRIMARY KEY (id),
+        ADD KEY mailUser (mailUser);
+        
+        ALTER TABLE Task
+        MODIFY id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+        
+        ALTER TABLE TasksList
+        MODIFY id int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
+        
+        ALTER TABLE Task
+        ADD CONSTRAINT Task_ibfk_1 FOREIGN KEY (idTasksList) REFERENCES TasksList (id);
+        
+        ALTER TABLE TasksList
+        ADD CONSTRAINT TasksList_ibfk_1 FOREIGN KEY (mailUser) REFERENCES Inscrit (mail) ON DELETE RESTRICT ON UPDATE RESTRICT;
+        COMMIT;
+        ';
 
         $this->con->executeQueryWithoutParameters($query);
     }

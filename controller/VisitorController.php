@@ -1,6 +1,6 @@
 <?php
 
-class VisitorControler extends ControllerMethods{
+class VisitorController extends ControllerMethods{
 
     function __construct(){
         global $rep, $vues;

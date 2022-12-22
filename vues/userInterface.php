@@ -21,10 +21,17 @@
 		<p style='color: transparent'>placeholder</p>
 	<?php } ?>
 
+	<?php if($_SESSION['role']=='anonymous'){ ?>
+	<form method="post" class="btn-right-corner">
+		<input class="btn" type="submit" value="Revenir à la page d'acceuil"/>	
+		<input type="hidden" name="action" value="disconnectFromUser"/>
+	</form>
+	<?php }else {?>
 	<form method="post" class="btn-right-corner">
 		<input class="btn" type="submit" value="Se deconnecter"/>	
 		<input type="hidden" name="action" value="disconnectFromUser"/>
 	</form>
+	<?php } ?>
 	</div>
 
 	<div class="page-container">

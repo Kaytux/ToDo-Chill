@@ -1,6 +1,6 @@
 <?php
 
-class FrontControler{
+class FrontController{
     
     function __construct(){
         global $rep, $vues;
@@ -8,6 +8,7 @@ class FrontControler{
         session_start();
 
         $listeAction_admin=array("disconnectFromAdmin","createTableBdd","createUser","deleteAllDataBdd","deleteAllTableBdd");
+        $this->createBdd();
 
         try{
             $admin = MdlAdmin::isAdmin();
@@ -23,13 +24,13 @@ class FrontControler{
                 if($admin === null){
                     require($rep.$vues['homePage']);
                 }else{
-                    new AdminControler();
+                    $cont = new AdminController();
                 }
             }else{
                 if($user != null){
-                    new UserControler();
+                    $cont = new UserController();
                 }else{
-                    new VisitorControler();
+                    $cont = new VisitorController();
                 }
             }
             
@@ -37,6 +38,14 @@ class FrontControler{
         }catch(Exception $e){
             echo "<p>A faire $e</p>";
         }
+    }
+
+    function createBdd(){
+        global $dsn, $usr, $mdp;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new AdminGateway($con);
+        $gateway->createTable();
     }
 }
 ?>
