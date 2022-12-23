@@ -45,11 +45,13 @@ class UserController extends ControllerMethods{
                     $this->deleteList();
                     break;
                 default:
-                    echo "erreur page inconnue";
+                    $dVueError['error'] = "error 404 : Page not found";
+                    require($rep.$vues['errorPage']);
                     break;
             }
         }catch(PDOException $e){
-            echo "$e";
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
         }
         
     } // fin constructeur

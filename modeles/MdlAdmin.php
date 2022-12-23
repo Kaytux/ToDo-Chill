@@ -3,7 +3,7 @@
         public static function connection($mail, $password, &$dVue){
             global $dsn, $usr, $mdp;
 
-            $con = new Connection($dsn, $usr, $mdp);
+            $con = new Connection($dsn, $usr, $mdp); 
             $gateway = new AdminGateway($con);
             if(!($hash = $gateway->getCredentials($mail))){
                 $dVue['email'] = "email inconnue";

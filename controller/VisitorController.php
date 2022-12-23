@@ -54,13 +54,14 @@ class VisitorController extends ControllerMethods{
                 case "deleteList":
                     $this->deleteList();
                     break;
-
                 default:
-                    echo "erreur page inconnue";
+                    $dVueError['error'] = "error 404 : Page not found";
+                    require($rep.$vues['errorPage']);
                     break;
             }
         }catch(PDOException $e){
-            echo $e;
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
         }
     }
 
@@ -76,12 +77,17 @@ class VisitorController extends ControllerMethods{
             exit;
         }
 
-        if(MdlAdmin::connection($mail, $password, $dVueError)){
-            $this->display('adminPage', null, $dVueError);
-        }elseif(MdlUser::connection($mail, $password, $dVueError)){
-            $this->display('userInterface', null, $dVueError);
-        }else{
-            $this->display('homePage', null, $dVueError);
+        try{
+            if(MdlAdmin::connection($mail, $password, $dVueError)){
+                $this->display('adminPage', null, $dVueError);
+            }elseif(MdlUser::connection($mail, $password, $dVueError)){
+                $this->display('userInterface', null, $dVueError);
+            }else{
+                $this->display('homePage', null, $dVueError);
+            }
+        }catch(PDOException $e){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
         }
     }
     
@@ -97,11 +103,17 @@ class VisitorController extends ControllerMethods{
             exit;
         }
 
-        if(MdlVisitor::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
-            require($rep.$vues['homePage']);
-        }else{
-            require($rep.$vues['signIn']);
+        try{
+            if(MdlVisitor::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
+                require($rep.$vues['homePage']);
+            }else{
+                require($rep.$vues['signIn']);
+            }
+        }catch(PDOException $e){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
         }
+        
     }
 
     function continueAsAnonymous(){
@@ -109,57 +121,6 @@ class VisitorController extends ControllerMethods{
         MdlVisitor::connection();
         $this->display('userInterface', null, null);
     }
-    
-    /*
-    function addAList(){
-        global $rep, $vues;
-        $name = $_POST['name'];
-        MdlUser::addAListToUser($name);
-        require($rep.$vues['userInterface']);
-    }
-
-    function changeTargetedList(){
-        global $rep, $vues;
-        $_SESSION['task'] = MdlUser::getDataTask($_POST['id']);
-        $_SESSION['targetedList'] = $_POST['id'];
-        require($rep.$vues['userInterface']);
-    }
-
-    function addATask(){
-        global $rep, $vues;
-        MdlUser::addATask($_POST['name']);
-        require($rep.$vues['userInterface']);
-    }
-
-    function changeStatus($status){
-        global $rep, $vues;
-        MdlUser::changeStatus($_POST['id'], $status);
-        require($rep.$vues['userInterface']);
-    }
-
-    function deleteTask(){
-        global $rep, $vues;
-        MdlUser::deleteTask($_POST['id']);
-        require($rep.$vues['userInterface']);
-    }
-
-    function deleteList(){
-        global $rep, $vues;
-        MdlUser::deleteList($_POST['id'], $dVueError);
-        require($rep.$vues['userInterface']);
-    }
-    
-    function display($page){
-        global $rep, $vues;
-        $dataVue = [];
-
-        $dataVue['list'] = MdlUser::getData($_SESSION['login']);
-        count($dataVue['list'])==0 ? $dataVue['task'] = null : $dataVue['task'] = MdlUser::getDataTask($dataVue['list'][0]->getId());
-        count($dataVue['list'])==0 ? $dataVue['targetedList'] = null : $dataVue['targetedList'] = $dataVue['list'][0]->getId();
-
-        require($rep.$vues[$page]);
-    }
-    */
 }
 
 ?>

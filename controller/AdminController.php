@@ -38,11 +38,13 @@ class AdminController{
                     $this->Reinit();
                     break;
                 default:
-                    $this->Reinit();
+                    $dVueError['error'] = "error 404 : Page not found";
+                    require($rep.$vues['errorPage']);
                     break;
             }
         }catch(PDOException $e){
-            echo "$e";
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
         }
     }
 

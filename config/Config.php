@@ -3,7 +3,7 @@
 $rep=__DIR__.'/../';
 
 //BD
-$dsn = "mysql:host=localhost; dbname=bdToDoChill";
+$dsn = "mysql:host=localhost; dbname=deedebdToDoChill";
 $usr = "viastolfi";
 $mdp = "MhhLeCaca1!";
 
@@ -18,6 +18,7 @@ $vues['signIn']='vues/signIn.php';
 $vues['mainPage']='vues/mainPage.php';
 $vues['adminPage']='vues/adminPage.php';
 $vues['userInterface']='vues/userInterface.php';
+$vues['errorPage']='vues/errorPage.php';
 
 $idUser = array();
 ?>

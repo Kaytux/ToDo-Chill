@@ -7,6 +7,7 @@ class FrontController{
 
         session_start();
 
+        $dVueError = array();
         $listeAction_admin=array("disconnectFromAdmin","createTableBdd","createUser","deleteAllDataBdd","deleteAllTableBdd");
 
         try{
@@ -35,16 +36,10 @@ class FrontController{
             
 
         }catch(Exception $e){
-            echo "<p>A faire $e</p>";
+            $dVueError['error'] = "error 404 : Page not found";
+            require($rep.$vues['errorPage']);
+            exit;
         }
-    }
-
-    function createBdd(){
-        global $dsn, $usr, $mdp;
-
-        $con = new Connection($dsn, $usr, $mdp);
-        $gateway = new AdminGateway($con);
-        $gateway->createTable();
     }
 }
 ?>

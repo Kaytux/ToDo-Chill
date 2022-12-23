@@ -19,7 +19,13 @@ class ControllerMethods{
             $this->display('userInterface', null, $dVueError);
             exit;
         }
-        MdlUser::addAListToUser($name);
+        try{
+            MdlUser::addAListToUser($name);
+        }catch(PDOException){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
+            exit;
+        }
         $this->display('userInterface',null, null);
     }
 
@@ -50,7 +56,13 @@ class ControllerMethods{
             $this->display('userInterface', null, $dVueError);
             exit;
         }
-        MdlUser::addATask($name, $id);
+        try{
+            MdlUser::addATask($name, $id);
+        }catch(PDOException){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
+            exit;
+        }
         $this->display('userInterface', $id, null);
     }
 
@@ -62,7 +74,13 @@ class ControllerMethods{
             $this->display('userInterface', null, $dVueError);
             exit;
         }
-        MdlUser::changeStatus($id, $status);
+        try{
+            MdlUser::changeStatus($id, $status);
+        }catch(PDOException){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
+            exit;
+        }
         $this->display('userInterface', MdlUser::getActualListFromTaskId($id), null);
     }
 
@@ -73,13 +91,25 @@ class ControllerMethods{
         if(!Validation::valideData($_REQUEST, 'id', $dVueError)){
             this->display('ErrorVue', $_POST['id'], $dVueError);
         }
-        MdlUser::deleteTask($id);
+        try{
+            MdlUser::deleteTask($id);
+        }catch(PDOException){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
+            exit;
+        }
         $this->display('userInterface', $listId, null);
     }
 
     function deleteList(){
         global $rep, $vues;
-        MdlUser::deleteList($_POST['id'], $dVueError);
+        try{
+            MdlUser::deleteList($_POST['id'], $dVueError);
+        }catch(PDOException){
+            $dVueError['error'] = "error 500 : unreachable database";
+            require($rep.$vues['errorPage']);
+            exit;
+        }
         $this->display('userInterface', $_POST['id'], $dVueError);
     }
 
