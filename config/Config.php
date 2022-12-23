@@ -3,7 +3,7 @@
 $rep=__DIR__.'/../';
 
 //BD
-$dsn = "mysql:host=localhost; dbname=deedebdToDoChill";
+$dsn = "mysql:host=localhost; dbname=bdToDoChill";
 $usr = "viastolfi";
 $mdp = "MhhLeCaca1!";
 

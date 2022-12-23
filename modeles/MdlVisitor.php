@@ -20,21 +20,27 @@ class MdlVisitor{
         return $results;
     }
     
-    public static function createNewAccount($login, $email, &$dVue){
-            global $dsn, $usr, $mdp;
+    public static function createNewAccount($login, $pass){
+        global $dsn, $usr, $mdp;
 
-            $mail = htmlspecialchars($login);
-            $pass = password_hash(htmlspecialchars($email),PASSWORD_DEFAULT);
+        $pass = password_hash($pass,PASSWORD_DEFAULT);
 
-            $con = new Connection($dsn, $usr, $mdp);
-            $gateway = new UserGateway($con);
-            if($gateway->addUserBdd($mail, $pass)){
-                return true;
-            }else{
-                $dVue['error'] = 'impossible de se connecter à la bdd';
-                return false;
-            }
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new UserGateway($con);
+        $gateway->addUserBdd($login, $pass);
+    }
+
+    public static function existPseudonym($login){
+        global $dsn, $usr, $mdp;
+
+        $con = new Connection($dsn, $usr, $mdp);
+        $gateway = new UserGateway($con);
+        $results = $gateway->getCredentials($login);
+        if($results!=false){
+            return true;
         }
+        return false;
+    }
 
 
 }

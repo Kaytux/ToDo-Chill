@@ -21,7 +21,7 @@
         <div class="displayForm">
             <h2 class="title">Connectez vous</h2>
             <form class="form" method="post">
-                <input class="form-entry" type="text" placeholder="Entrez votre email" name="email">
+                <input class="form-entry" type="text" placeholder="Entrez votre pseudo" name="email">
             <input class="form-entry" type="password" placeholder="Entrez votre mot de passe" name="password">
             <div>
                 <input class="btn form-validation-btn" type="submit" value="Connexion"/>	
@@ -40,7 +40,7 @@
 	<?php
 		if(isset($dVueError) && count($dVueError) > 0){
 			foreach ($dVueError as $value){
-				echo "<p class='title'>Error : $value</p> <br>";
+				echo "<p class='title'>Error : champs obligatoire</p> <br>";
 			}
 		}
 	?>

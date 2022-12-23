@@ -99,15 +99,22 @@ class VisitorController extends ControllerMethods{
         $variable = ["email", "password"];
 
         if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
-            require($rep.$vues['signIn']);
+            $this->display('signIn', null, $dVueError);
             exit;
         }
 
         try{
-            if(MdlVisitor::createNewAccount($_POST['email'], $_POST['password'], $dVueError)){
-                require($rep.$vues['homePage']);
+            if(MdlVisitor::existPseudonym($mail)){
+                $dVueError['alreadyExist'] = "Pseudo déjà utiliser, veuillez en choisir un autre";
+                $this->display('signIn',null,$dVueError);
+                exit;
+            }
+            if(MdlVisitor::createNewAccount($mail, $password, $dVueError)){
+                $this->display('homePage', null, null);
+                exit;
             }else{
-                require($rep.$vues['signIn']);
+                $this->display('signIn', null, $dVueError);
+                exit;
             }
         }catch(PDOException $e){
             $dVueError['error'] = "error 500 : unreachable database";
