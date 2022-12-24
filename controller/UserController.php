@@ -44,6 +44,9 @@ class UserController extends ControllerMethods{
                 case "deleteList":
                     $this->deleteList();
                     break;
+                case "goToAnonymous":
+                    $this->goToAnonymous();
+                    break;
                 default:
                     $dVueError['error'] = "error 404 : Page not found";
                     require($rep.$vues['errorPage']);
@@ -55,6 +58,14 @@ class UserController extends ControllerMethods{
         }
         
     } // fin constructeur
+
+    function goToAnonymous(){
+        $_SESSION['loginHolder'] = $_SESSION['login'];
+        $_SESSION['role'] = 'anonymous';
+        $_SESSION['login'] = null;
+
+        $this->display('userInterface', null, null);
+    }
 } // fin classe
 
 ?>

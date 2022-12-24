@@ -5,7 +5,7 @@
 	<meta charset="utf8"/>
 	<title>Accueil</title>
 	<!--<base href="https://codefirst.iut.uca.fr/containers/todo-chill-vincentastolfi/">-->
-    <link rel="stylesheet" href="styles/homePage.css">
+    <link rel="stylesheet" href='styles/homePage.css'>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/form.css">
 </head>
@@ -40,7 +40,7 @@
 	<?php
 		if(isset($dVueError) && count($dVueError) > 0){
 			foreach ($dVueError as $value){
-				echo "<p class='title'>Error : champs obligatoire</p> <br>";
+				echo "<p class='error-container'>Error :".$value." </p> <br>";
 			}
 		}
 	?>

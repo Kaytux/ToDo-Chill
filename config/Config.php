@@ -3,9 +3,9 @@
 $rep=__DIR__.'/../';
 
 //BD
-$dsn = "mysql:host=localhost; dbname=bdToDoChill";
-$usr = "viastolfi";
-$mdp = "MhhLeCaca1!";
+$dsn = "a changer";
+$usr = "a changer";
+$mdp = "a changer";
 
 //$dsn='mysql:host=10.9.0.67;dbname='.getenv("MARIADB_DATABASE");
 //$dbname=getenv("MARIADB_DATABASE");

@@ -11,10 +11,16 @@
 </head>
 
 <body>	
-    <form method="post" class="btn-right-corner">
-		<input class="btn" type="submit" value="Continue as anonymous"/>	
-		<input type="hidden" name="action" value="continueAsAnonymous"/>
-	</form>
+    <div class="btn-top-container">
+        <form method="post">
+            <input class="btn" type="submit" value="Revenir au menu principal"/>	
+            <input type="hidden" name="action" value="goToHomePage"/>
+        </form>
+        <form method="post">
+            <input class="btn" type="submit" value="Continue as anonymous"/>	
+            <input type="hidden" name="action" value="continueAsAnonymous"/>
+        </form>
+    </div>
     
     <div class="form">
 		<h1 class="title">To-Do Chill</h1>

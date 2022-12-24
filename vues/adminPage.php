@@ -40,5 +40,13 @@
 		<input class="btn" type="submit" value="DETRUIRE TOUTE LES TABLES"/>	
 		<input type="hidden" name="action" value="deleteAllTableBdd"/>
 	</form>
+
+	<?php
+		if(isset($dVueError) && count($dVueError) > 0){
+			foreach ($dVueError as $value){
+				echo "<p class='error-container'>Error : $value</p> <br>";
+			}
+		}
+	?>
 </body>
 </html>

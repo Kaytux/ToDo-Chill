@@ -43,6 +43,7 @@ class AdminController{
                     break;
             }
         }catch(PDOException $e){
+            echo $e;
             $dVueError['error'] = "error 500 : unreachable database";
             require($rep.$vues['errorPage']);
         }
@@ -64,9 +65,19 @@ class AdminController{
 
     function createUser(){
         global $dsn, $usr, $mdp;
-        
+
+        $mail = Validation::clean($_POST['email']);
+        $password = Validation::clean($_POST['password']);
+        $variable = ["email", "password"];
+
+        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+            $this->display('adminPage', null, $dVueError);
+            exit;
+        }
+
+        $pass = password_hash($password,PASSWORD_DEFAULT);
         $con = new Connection($dsn, $usr, $mdp);
-        $user = new User($_POST['email'], $_POST['password']);
+        $user = new User($mail, $pass);
 
         if(isset($_POST['isAdmin'])){
             $gateway = new AdminGateway($con);

@@ -4,16 +4,16 @@
         public static function connection($mail, $password, &$dVue){
             global $dsn, $usr, $mdp;
 
-                $con = new Connection($dsn, $usr, $mdp);
-                $gateway = new UserGateway($con);
-                if(!$hash = $gateway->getCredentials($mail)){
-                    return false;
-                }
+            $con = new Connection($dsn, $usr, $mdp);
+            $gateway = new UserGateway($con);
+            if(!$hash = $gateway->getCredentials($mail)){
+                return false;
+            }
 
-                if(password_verify($password, $hash['mdp'])){
-                    $_SESSION['login'] = $mail;
-                    $_SESSION['role'] = 'user';
-                    return true;
+            if(password_verify($password, $hash['mdp'])){
+                $_SESSION['login'] = $mail;
+                $_SESSION['role'] = 'user';
+                return true;
             }else{
                 $dVue['credentials'] = "mot de passe incorect";
                 return false;

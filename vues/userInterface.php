@@ -21,12 +21,22 @@
 		<p style='color: transparent'>placeholder</p>
 	<?php } ?>
 
-	<?php if($_SESSION['role']=='anonymous'){ ?>
+	<?php if($_SESSION['role']=='anonymous' && isset($_SESSION['loginHolder'])){ ?>
 	<form method="post" class="btn-right-corner">
-		<input class="btn" type="submit" value="Revenir à la page d'acceuil"/>	
+		<input class="btn" type="submit" value="Revenir aux listes privées"/>	
+		<input type="hidden" name="action" value="goToPrivate"/>
+	</form>
+	<?php }elseif($_SESSION['role']=='anonymous' && !isset($_SESSION['lohinHolder'])) {?>
+	<form method="post" class="btn-right-corner">
+		<input class="btn" type="submit" value="Revenir à l'écran d'acceuil"/>	
 		<input type="hidden" name="action" value="disconnectFromUser"/>
 	</form>
-	<?php }else {?>
+	<?php }else{ ?>
+	<form method="post" class="btn-right-corner">
+		<input class="btn" type="submit" value="Voir les listes publiques"/>	
+		<input type="hidden" name="action" value="goToAnonymous"/>
+	</form>
+
 	<form method="post" class="btn-right-corner">
 		<input class="btn" type="submit" value="Se deconnecter"/>	
 		<input type="hidden" name="action" value="disconnectFromUser"/>
@@ -57,6 +67,7 @@
 						<input class="delete material-symbols-outlined" type="submit" value="delete">
 						<input type="hidden" name="action" value="deleteList">
 						<input type="hidden" name="id" value=<?=$id?>> 
+						<input type="hidden" name="idList" value=<?=$dataVue['targetedList']?>>
 					</form>
 					</div>
 				<?php
@@ -97,6 +108,7 @@
 					<input class="delete material-symbols-outlined" type="submit" value="delete">
 					<input type="hidden" name="action" value="deleteTask">
 					<input type="hidden" name="id" value=<?=$id?>> 
+					<input type="hidden" name="idList" value=<?=$dataVue['targetedList']?>>
 				</form>
 				<?php
 					}

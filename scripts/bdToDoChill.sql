@@ -17,6 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+DROP TABLE IF EXISTS Task;
+DROP TABLE IF EXISTS TasksList;
+DROP TABLE IF EXISTS Inscrit;
+
 --
 -- Base de données : `bdToDoChill`
 --
@@ -39,7 +43,7 @@ CREATE TABLE `Inscrit` (
 
 -- ajout d'un compte admin ayant pour mail "admin" et pour mot de passe "admin"
 INSERT INTO `Inscrit` (`mail`, `mdp`, `isAdmin`) VALUES
-('admin', '$2y$10$kS0exZw6F2ZJkeBfXzti9OUh1QR.yePlOSxLo/9NRInX33q4z2ndi', 1),
+('admin', '$2y$10$kS0exZw6F2ZJkeBfXzti9OUh1QR.yePlOSxLo/9NRInX33q4z2ndi', 1);
 
 -- --------------------------------------------------------
 
@@ -134,4 +138,3 @@ COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

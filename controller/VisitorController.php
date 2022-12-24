@@ -54,6 +54,12 @@ class VisitorController extends ControllerMethods{
                 case "deleteList":
                     $this->deleteList();
                     break;
+                case "goToPrivate":
+                    $this->goToPrivate();
+                    break;
+                case "goToHomePage":
+                    $this->Reinit();
+                    break;
                 default:
                     $dVueError['error'] = "error 404 : Page not found";
                     require($rep.$vues['errorPage']);
@@ -67,15 +73,15 @@ class VisitorController extends ControllerMethods{
 
     function connection(){
         global $rep, $vues;
-        
-        $mail = Validation::clean($_POST['email']);
-        $password = Validation::clean($_POST['password']);
-        $variable = ["email", "password"];
 
+        $variable = ["email", "password"];
         if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
             require($rep.$vues['homePage']);
             exit;
-        }
+        }       
+
+        $mail = Validation::clean($_POST['email']);
+        $password = Validation::clean($_POST['password']);
 
         try{
             if(MdlAdmin::connection($mail, $password, $dVueError)){
@@ -83,7 +89,7 @@ class VisitorController extends ControllerMethods{
             }elseif(MdlUser::connection($mail, $password, $dVueError)){
                 $this->display('userInterface', null, $dVueError);
             }else{
-                $this->display('homePage', null, $dVueError);
+                require($rep.$vues['homePage']);
             }
         }catch(PDOException $e){
             $dVueError['error'] = "error 500 : unreachable database";
@@ -124,8 +130,15 @@ class VisitorController extends ControllerMethods{
     }
 
     function continueAsAnonymous(){
-        global $rep, $vues;
         MdlVisitor::connection();
+        $this->display('userInterface', null, null);
+    }
+
+    function goToPrivate(){
+        $_SESSION['login'] = $_SESSION['loginHolder'];
+        $_SESSION['role'] = 'user';
+        unset($_SESSION['loginHolder']);
+
         $this->display('userInterface', null, null);
     }
 }

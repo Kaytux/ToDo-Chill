@@ -9,9 +9,8 @@ class ControllerMethods{
     
     function addAList(){
         global $rep, $vues;
-        $variable = ["name"];
         $name = Validation::clean($_POST['name']);
-        if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
+        if(!Validation::valideData($_REQUEST, 'name', $dVueError)){
             $this->display('userInterface', null, $dVueError);
             exit;
         }
@@ -89,7 +88,7 @@ class ControllerMethods{
         $id = Validation::clean($_POST['id']);
         $listId =  MdlUser::getActualListFromTaskId($id);
         if(!Validation::valideData($_REQUEST, 'id', $dVueError)){
-            this->display('ErrorVue', $_POST['id'], $dVueError);
+            this->display('ErrorVue', $id, $dVueError);
         }
         try{
             MdlUser::deleteTask($id);
@@ -103,21 +102,28 @@ class ControllerMethods{
 
     function deleteList(){
         global $rep, $vues;
+        $id = Validation::clean($_POST['id']);
+        $idList = Validation::clean($_POST['idList']);
+
+        if(!Validation::valideData($_REQUEST, 'id', $dVueError)){
+            $this->display('ErrorVue', $id, $dVueError);
+        }
         try{
-            MdlUser::deleteList($_POST['id'], $dVueError);
+            MdlUser::deleteList($id, $dVueError);
         }catch(PDOException){
             $dVueError['error'] = "error 500 : unreachable database";
             require($rep.$vues['errorPage']);
             exit;
         }
-        $this->display('userInterface', $_POST['id'], $dVueError);
+
+        $this->display('userInterface', $idList, $dVueError);
     }
 
     function display($page, ?string $actualList, ?array $dVueError){
         global $rep, $vues;
         $dataVue = [];
 
-        if(isset($_SESSION['login'])){
+        if(isset($_SESSION['login']) || $_SESSION['login'] == null){
             $dataVue['list'] = MdlUser::getData($_SESSION['login']);
             $dataVue['task'] = MdlUser::getDataTask($actualList);
             $dataVue['targetedList'] = $actualList;

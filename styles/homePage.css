@@ -7,3 +7,10 @@
     display: flex;
     justify-content: center;
 }
+
+.btn-top-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 1rem;
+}

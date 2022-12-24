@@ -12,23 +12,20 @@ class AdminGateway{
         mail varchar(40) NOT NULL,
         mdp varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
         isAdmin tinyint(1) DEFAULT 0
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-        INSERT INTO Inscrit (mail, mdp, isAdmin) VALUES
-        ("admin", "$2y$10$kS0exZw6F2ZJkeBfXzti9OUh1QR.yePlOSxLo/9NRInX33q4z2ndi", 1),
+        ); 
         
         CREATE TABLE Task (
         id int NOT NULL,
         name varchar(40) DEFAULT NULL,
         status int NOT NULL DEFAULT 0,
         idTasksList int DEFAULT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        );
 
         CREATE TABLE TasksList (
         id int NOT NULL,
         name varchar(40) DEFAULT NULL,
         mailUser varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+        );
 
         ALTER TABLE Inscrit
         ADD PRIMARY KEY (mail);
@@ -52,9 +49,13 @@ class AdminGateway{
         
         ALTER TABLE TasksList
         ADD CONSTRAINT TasksList_ibfk_1 FOREIGN KEY (mailUser) REFERENCES Inscrit (mail) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
         COMMIT;
         ';
 
+        $this->con->executeQueryWithoutParameters($query);
+
+        $query='INSERT INTO Inscrit (mail, mdp, isAdmin) VALUES("admin", "$2y$10$kS0exZw6F2ZJkeBfXzti9OUh1QR.yePlOSxLo/9NRInX33q4z2ndi", 1);';
         $this->con->executeQueryWithoutParameters($query);
     }
 
