@@ -105,21 +105,21 @@ class VisitorController extends ControllerMethods{
         $variable = ["email", "password"];
 
         if(!Validation::valideData($_REQUEST, $variable, $dVueError)){
-            $this->display('signIn', null, $dVueError);
+            require($rep.$vues['signIn']);
             exit;
         }
 
         try{
             if(MdlVisitor::existPseudonym($mail)){
                 $dVueError['alreadyExist'] = "Pseudo déjà utiliser, veuillez en choisir un autre";
-                $this->display('signIn',null,$dVueError);
+                require($rep.$vues['signIn']);
                 exit;
             }
             if(MdlVisitor::createNewAccount($mail, $password, $dVueError)){
-                $this->display('homePage', null, null);
+                require($rep.$vues['homePage']);
                 exit;
             }else{
-                $this->display('signIn', null, $dVueError);
+                require($rep.$vues['signIn']);
                 exit;
             }
         }catch(PDOException $e){
